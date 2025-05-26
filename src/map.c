@@ -294,7 +294,7 @@ void map_to_wad(const char* output_name) {
                         );
 
                         uint16_t door_sector = add_custom_sector(
-                            doommap.last_asector--, 0, 0, get_config()->flats[FLAT_FLOOR],
+                            doommap.last_asector--, 0, 0, cell->door->flats[FLAT_FLOOR],
                             cell->door->flats[FLAT_CEILING], get_config()->brightness, ST_NORMAL, 0
                         );
 

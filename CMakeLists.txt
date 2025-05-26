@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.27.0 FATAL_ERROR)
 
 project(
     wolf2wad
-    VERSION 0.1.0
+    VERSION 0.1.1
     LANGUAGES C
 )
 
@@ -37,3 +37,13 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${SOURCE_DIR})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBS})
 target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS=1)
+
+# Copy assets
+add_custom_command(
+    TARGET ${PROJECT_NAME}
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E remove $<TARGET_FILE_DIR:${PROJECT_NAME}>/config.json
+    COMMAND ${CMAKE_COMMAND} -E remove $<TARGET_FILE_DIR:${PROJECT_NAME}>/WOLFDOOM.wad
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/config.json $<TARGET_FILE_DIR:${PROJECT_NAME}>/config.json
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/WOLFDOOM.wad $<TARGET_FILE_DIR:${PROJECT_NAME}>/WOLFDOOM.wad
+)

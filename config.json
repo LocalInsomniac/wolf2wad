@@ -3,7 +3,7 @@
     "format": "mbf21",
 
     "floor": "FLAT5_4",
-    "ceiling": "CEIL5_1",
+    "ceiling": "FWOLF31",
     "brightness": 160,
 
     "walls": {
@@ -327,16 +327,16 @@
             "axis": "y",
             "ltex": "PWOLF59",
             "rtex": "PWOLF60",
-            "track": "PWOLF61",
-            "floor": "CEIL5_1"
+            "ceiling": "CEIL5_1",
+            "track": "PWOLF61"
         },
 
         "91": {
             "name": "Door horizontal",
             "ltex": "PWOLF59",
             "rtex": "PWOLF60",
-            "track": "PWOLF61",
-            "floor": "CEIL5_1"
+            "ceiling": "CEIL5_1",
+            "track": "PWOLF61"
         },
 
         "92": {
@@ -344,8 +344,8 @@
             "axis": "y",
             "ltex": "PWOLF66",
             "rtex": "PWOLF67",
+            "ceiling": "CEIL5_1",
             "track": "PWOLF61",
-            "floor": "CEIL5_1",
             "type": "yellow"
         },
 
@@ -355,7 +355,6 @@
             "rtex": "PWOLF67",
             "ceiling": "CEIL5_1",
             "track": "PWOLF61",
-            "floor": "CEIL5_1",
             "type": "yellow"
         },
 
@@ -364,8 +363,8 @@
             "axis": "y",
             "ltex": "PWOLF64",
             "rtex": "PWOLF65",
+            "ceiling": "CEIL5_1",
             "track": "PWOLF61",
-            "floor": "CEIL5_1",
             "type": "blue"
         },
 
@@ -373,8 +372,8 @@
             "name": "Door horizontal (silver key)",
             "ltex": "PWOLF64",
             "rtex": "PWOLF65",
+            "ceiling": "CEIL5_1",
             "track": "PWOLF61",
-            "floor": "CEIL5_1",
             "type": "blue"
         },
 
@@ -383,16 +382,16 @@
             "axis": "y",
             "ltex": "PWOLF62",
             "rtex": "PWOLF63",
-            "track": "PWOLF61",
-            "floor": "CEIL5_1"
+            "ceiling": "CEIL5_1",
+            "track": "PWOLF61"
         },
 
         "101": {
             "name": "Elevator door (horizontal)",
             "ltex": "PWOLF62",
             "rtex": "PWOLF63",
-            "track": "PWOLF61",
-            "floor": "CEIL5_1"
+            "ceiling": "CEIL5_1",
+            "track": "PWOLF61"
         }
     },
 
