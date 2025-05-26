@@ -1,0 +1,9 @@
+/build
+/.cache
+*.bak
+
+/include/fmod/windows
+/include/fmod/linux
+/.vscode
+/modsrc/1extra
+modsrc/disabled.json

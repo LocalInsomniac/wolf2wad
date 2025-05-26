@@ -1,0 +1,1789 @@
+{
+    "name": "Wolfenstein 3D (.WL6)",
+    "format": "mbf21",
+
+    "floor": "FLAT5_4",
+    "ceiling": "CEIL5_1",
+    "brightness": 160,
+
+    "walls": {
+        "1": {
+            "name": "Grey brick 1",
+            "xtex": "PWOLF1",
+            "ytex": "PWOLF1"
+        },
+
+        "2": {
+            "name": "Grey brick 2",
+            "xtex": "PWOLF2",
+            "ytex": "PWOLF2"
+        },
+
+        "27": {
+            "name": "Grey brick 3",
+            "xtex": "PWOLF31",
+            "ytex": "PWOLF31"
+        },
+
+        "3": {
+            "name": "Grey brick / flag",
+            "xtex": "PWOLF3",
+            "ytex": "PWOLF3"
+        },
+
+        "4": {
+            "name": "Grey brick / Hitler",
+            "xtex": "PWOLF4",
+            "ytex": "PWOLF4"
+        },
+
+        "6": {
+            "name": "Grey brick / eagle",
+            "xtex": "PWOLF6",
+            "ytex": "PWOLF6"
+        },
+
+        "28": {
+            "name": "Grey brick / sign",
+            "xtex": "PWOLF32",
+            "ytex": "PWOLF33"
+        },
+
+        "24": {
+            "name": "Dirty brick 1",
+            "xtex": "PWOLF27",
+            "ytex": "PWOLF27"
+        },
+
+        "26": {
+            "name": "Dirty brick 2",
+            "xtex": "PWOLF30",
+            "ytex": "PWOLF30"
+        },
+
+        "5": {
+            "name": "Cell",
+            "xtex": "PWOLF5",
+            "ytex": "PWOLF5"
+        },
+
+        "7": {
+            "name": "Cell / skeleton",
+            "xtex": "PWOLF7",
+            "ytex": "PWOLF7"
+        },
+
+        "8": {
+            "name": "Blue brick 1",
+            "xtex": "PWOLF8",
+            "ytex": "PWOLF8"
+        },
+
+        "9": {
+            "name": "Blue brick 2",
+            "xtex": "PWOLF9",
+            "ytex": "PWOLF9"
+        },
+
+        "41": {
+            "name": "Blue brick / sign",
+            "xtex": "PWOLF49",
+            "ytex": "PWOLF50"
+        },
+
+        "12": {
+            "name": "Wood",
+            "xtex": "PWOLF12",
+            "ytex": "PWOLF12"
+        },
+
+        "10": {
+            "name": "Wood / eagle",
+            "xtex": "PWOLF10",
+            "ytex": "PWOLF10"
+        },
+
+        "11": {
+            "name": "Wood / Hitler",
+            "xtex": "PWOLF11",
+            "ytex": "PWOLF11"
+        },
+
+        "23": {
+            "name": "Wood / iron cross",
+            "xtex": "PWOLF26",
+            "ytex": "PWOLF26"
+        },
+
+        "13": {
+            "name": "Entrance to level",
+            "xtex": "PWOLF13",
+            "ytex": "PWOLF13"
+        },
+
+        "15": {
+            "name": "Steel",
+            "xtex": "PWOLF16",
+            "ytex": "PWOLF16"
+        },
+
+        "14": {
+            "name": "Steel / sign",
+            "xtex": "PWOLF14",
+            "ytex": "PWOLF15"
+        },
+
+        "16": {
+            "name": "Landscape",
+            "xtex": "PWOLF17",
+            "ytex": "PWOLF18"
+        },
+
+        "17": {
+            "name": "Red brick",
+            "xtex": "PWOLF19",
+            "ytex": "PWOLF19"
+        },
+
+        "18": {
+            "name": "Red brick / swastika",
+            "xtex": "PWOLF20",
+            "ytex": "PWOLF20"
+        },
+
+        "20": {
+            "name": "Red brick / flag",
+            "xtex": "PWOLF22",
+            "ytex": "PWOLF22"
+        },
+
+        "38": {
+            "name": "Multicolor brick",
+            "xtex": "PWOLF46",
+            "ytex": "PWOLF46"
+        },
+
+        "19": {
+            "name": "Purple",
+            "xtex": "PWOLF21",
+            "ytex": "PWOLF21"
+        },
+
+        "25": {
+            "name": "Purple / blood",
+            "xtex": "PWOLF28",
+            "ytex": "PWOLF29"
+        },
+
+        "29": {
+            "name": "Brown weave",
+            "xtex": "PWOLF34",
+            "ytex": "PWOLF34"
+        },
+
+        "32": {
+            "name": "Brown weave / blood 1",
+            "xtex": "PWOLF39",
+            "ytex": "PWOLF40"
+        },
+
+        "30": {
+            "name": "Brown weave / blood 2",
+            "xtex": "PWOLF35",
+            "ytex": "PWOLF36"
+        },
+
+        "31": {
+            "name": "Brown weave / blood 3",
+            "xtex": "PWOLF37",
+            "ytex": "PWOLF38"
+        },
+
+        "33": {
+            "name": "Stained glass",
+            "xtex": "PWOLF41",
+            "ytex": "PWOLF41"
+        },
+
+        "35": {
+            "name": "Grey wall 1",
+            "xtex": "PWOLF43",
+            "ytex": "PWOLF43"
+        },
+
+        "39": {
+            "name": "Grey wall 2",
+            "xtex": "PWOLF47",
+            "ytex": "PWOLF47"
+        },
+
+        "49": {
+            "name": "Grey wall / Hitler",
+            "xtex": "PWOLF58",
+            "ytex": "PWOLF58"
+        },
+
+        "43": {
+            "name": "Grey wall / map",
+            "xtex": "PWOLF52",
+            "ytex": "PWOLF52"
+        },
+
+        "37": {
+            "name": "Grey wall / vent",
+            "xtex": "PWOLF45",
+            "ytex": "PWOLF45"
+        },
+
+        "40": {
+            "name": "Blue wall",
+            "xtex": "PWOLF48",
+            "ytex": "PWOLF48"
+        },
+
+        "36": {
+            "name": "Blue wall / swastika",
+            "xtex": "PWOLF44",
+            "ytex": "PWOLF44"
+        },
+
+        "34": {
+            "name": "Blue wall / skull",
+            "xtex": "PWOLF42",
+            "ytex": "PWOLF42"
+        },
+
+        "44": {
+            "name": "Brown stone 1",
+            "xtex": "PWOLF53",
+            "ytex": "PWOLF53"
+        },
+
+        "45": {
+            "name": "Brown stone 2",
+            "xtex": "PWOLF54",
+            "ytex": "PWOLF54"
+        },
+
+        "42": {
+            "name": "Brown marble 1",
+            "xtex": "PWOLF51",
+            "ytex": "PWOLF51"
+        },
+
+        "46": {
+            "name": "Brown marble 2",
+            "xtex": "PWOLF55",
+            "ytex": "PWOLF55"
+        },
+
+        "47": {
+            "name": "Brown marble / flag",
+            "xtex": "PWOLF56",
+            "ytex": "PWOLF56"
+        },
+
+        "48": {
+            "name": "Wood panel",
+            "xtex": "PWOLF57",
+            "ytex": "PWOLF57"
+        },
+
+        "50": {
+            "name": "Fake door",
+            "xtex": "PWOLF59",
+            "ytex": "PWOLF59"
+        },
+
+        "51": {
+            "name": "Door excavation (side of door)",
+            "xtex": "PWOLF61",
+            "ytex": "PWOLF61"
+        },
+
+        "53": {
+            "name": "Fake locked door",
+            "xtex": "PWOLF64",
+            "ytex": "PWOLF64"
+        },
+
+        "21": {
+            "name": "Elevator",
+            "xtex": "PWOLF23",
+            "ytex": "PWOLF24",
+            "yact": "exit"
+        },
+
+        "22": {
+            "name": "Fake elevator",
+            "xtex": "PWOLF23",
+            "ytex": "PWOLF25"
+        }
+    },
+
+    "doors": {
+        "90": {
+            "name": "Door vertical",
+            "axis": "y",
+            "ltex": "PWOLF59",
+            "rtex": "PWOLF60",
+            "track": "PWOLF61",
+            "floor": "CEIL5_1"
+        },
+
+        "91": {
+            "name": "Door horizontal",
+            "ltex": "PWOLF59",
+            "rtex": "PWOLF60",
+            "track": "PWOLF61",
+            "floor": "CEIL5_1"
+        },
+
+        "92": {
+            "name": "Door vertical (gold key)",
+            "axis": "y",
+            "ltex": "PWOLF66",
+            "rtex": "PWOLF67",
+            "track": "PWOLF61",
+            "floor": "CEIL5_1",
+            "type": "yellow"
+        },
+
+        "93": {
+            "name": "Door horizontal (gold key)",
+            "ltex": "PWOLF66",
+            "rtex": "PWOLF67",
+            "ceiling": "CEIL5_1",
+            "track": "PWOLF61",
+            "floor": "CEIL5_1",
+            "type": "yellow"
+        },
+
+        "94": {
+            "name": "Door vertical (silver key)",
+            "axis": "y",
+            "ltex": "PWOLF64",
+            "rtex": "PWOLF65",
+            "track": "PWOLF61",
+            "floor": "CEIL5_1",
+            "type": "blue"
+        },
+
+        "95": {
+            "name": "Door horizontal (silver key)",
+            "ltex": "PWOLF64",
+            "rtex": "PWOLF65",
+            "track": "PWOLF61",
+            "floor": "CEIL5_1",
+            "type": "blue"
+        },
+
+        "100": {
+            "name": "Elevator door (normal)",
+            "axis": "y",
+            "ltex": "PWOLF62",
+            "rtex": "PWOLF63",
+            "track": "PWOLF61",
+            "floor": "CEIL5_1"
+        },
+
+        "101": {
+            "name": "Elevator door (horizontal)",
+            "ltex": "PWOLF62",
+            "rtex": "PWOLF63",
+            "track": "PWOLF61",
+            "floor": "CEIL5_1"
+        }
+    },
+
+    "objects": {
+        "98": {
+            "name": "Secret door",
+            "type": "pushwall"
+        },
+
+        "43": {
+            "name": "Gold key",
+            "type": "thing",
+            "ednum": 20020
+        },
+
+        "44": {
+            "name": "Silver key",
+            "type": "thing",
+            "ednum": 20019
+        },
+
+        "52": {
+            "name": "Cross",
+            "type": "thing",
+            "ednum": 20007
+        },
+
+        "53": {
+            "name": "Chalace",
+            "type": "thing",
+            "ednum": 20008
+        },
+
+        "54": {
+            "name": "Jewels",
+            "type": "thing",
+            "ednum": 20009
+        },
+
+        "55": {
+            "name": "Crown",
+            "type": "thing",
+            "ednum": 20010
+        },
+
+        "29": {
+            "name": "Dog food",
+            "type": "thing",
+            "ednum": 20002
+        },
+
+        "47": {
+            "name": "Food",
+            "type": "thing",
+            "ednum": 20004
+        },
+
+        "48": {
+            "name": "First aid kit",
+            "type": "thing",
+            "ednum": 20005
+        },
+
+        "56": {
+            "name": "Extralife",
+            "type": "thing",
+            "ednum": 20011
+        },
+
+        "50": {
+            "name": "Small gun",
+            "type": "thing",
+            "ednum": 20023
+        },
+
+        "51": {
+            "name": "Machine gun",
+            "type": "thing",
+            "ednum": 20024
+        },
+
+        "49": {
+            "name": "Ammo",
+            "type": "thing",
+            "ednum": 20013
+        },
+
+        "27": {
+            "name": "Chandelier",
+            "type": "thing",
+            "ednum": 20062
+        },
+
+        "37": {
+            "name": "Ceiling light (green)",
+            "type": "thing",
+            "ednum": 20071
+        },
+
+        "26": {
+            "name": "Floor lamp",
+            "type": "thing",
+            "ednum": 20061
+        },
+
+        "60": {
+            "name": "Well",
+            "type": "thing",
+            "ednum": 20081
+        },
+
+        "59": {
+            "name": "Well / water",
+            "type": "thing",
+            "ednum": 20080
+        },
+
+        "23": {
+            "name": "Water",
+            "type": "thing",
+            "ednum": 20058
+        },
+
+        "61": {
+            "name": "Pool of blood",
+            "type": "thing",
+            "ednum": 20000
+        },
+
+        "58": {
+            "name": "Barrel",
+            "type": "thing",
+            "ednum": 20079
+        },
+
+        "24": {
+            "name": "Oil drum",
+            "type": "thing",
+            "ednum": 20059
+        },
+
+        "46": {
+            "name": "Basket",
+            "type": "thing",
+            "ednum": 20078
+        },
+
+        "25": {
+            "name": "Table with chairs",
+            "type": "thing",
+            "ednum": 20060
+        },
+
+        "36": {
+            "name": "Table",
+            "type": "thing",
+            "ednum": 20070
+        },
+
+        "30": {
+            "name": "White column",
+            "type": "thing",
+            "ednum": 20064
+        },
+
+        "31": {
+            "name": "Green plant",
+            "type": "thing",
+            "ednum": 20065
+        },
+
+        "34": {
+            "name": "Brown plant",
+            "type": "thing",
+            "ednum": 20068
+        },
+
+        "35": {
+            "name": "Vase",
+            "type": "thing",
+            "ednum": 20069
+        },
+
+        "39": {
+            "name": "Armor",
+            "type": "thing",
+            "ednum": 20073
+        },
+
+        "62": {
+            "name": "Flag",
+            "type": "thing",
+            "ednum": 20082
+        },
+
+        "33": {
+            "name": "Sink",
+            "type": "thing",
+            "ednum": 20067
+        },
+
+        "38": {
+            "name": "Utensils brown",
+            "type": "thing",
+            "ednum": 20072
+        },
+
+        "67": {
+            "name": "Utensils blue",
+            "type": "thing",
+            "ednum": 20087
+        },
+
+        "68": {
+            "name": "Stove",
+            "type": "thing",
+            "ednum": 20088
+        },
+
+        "69": {
+            "name": "Rack",
+            "type": "thing",
+            "ednum": 20089
+        },
+
+        "45": {
+            "name": "Bed",
+            "type": "thing",
+            "ednum": 20077
+        },
+
+        "40": {
+            "name": "Empty cage",
+            "type": "thing",
+            "ednum": 20074
+        },
+
+        "41": {
+            "name": "Cage / skeleton",
+            "type": "thing",
+            "ednum": 20075
+        },
+
+        "28": {
+            "name": "Hanging skeleton",
+            "type": "thing",
+            "ednum": 20063
+        },
+
+        "32": {
+            "name": "Skeleton",
+            "type": "thing",
+            "ednum": 20066
+        },
+
+        "42": {
+            "name": "Bones 1",
+            "type": "thing",
+            "ednum": 20076
+        },
+
+        "64": {
+            "name": "Bones 2",
+            "type": "thing",
+            "ednum": 20084
+        },
+
+        "65": {
+            "name": "Bones 3",
+            "type": "thing",
+            "ednum": 20085
+        },
+
+        "66": {
+            "name": "Bones 4",
+            "type": "thing",
+            "ednum": 20086
+        },
+
+        "57": {
+            "name": "Bones / blood",
+            "type": "thing",
+            "ednum": 20001
+        },
+
+        "70": {
+            "name": "Vines",
+            "type": "thing",
+            "ednum": 20090
+        },
+
+        "124": {
+            "name": "Dead Guard",
+            "type": "thing",
+            "ednum": 20057
+        },
+
+        "108": {
+            "name": "Guard 1/standing/East",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "109": {
+            "name": "Guard 1/standing/North",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "110": {
+            "name": "Guard 1/standing/West",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "111": {
+            "name": "Guard 1/standing/South",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "126": {
+            "name": "SS 1/standing/East",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "127": {
+            "name": "SS 1/standing/North",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "128": {
+            "name": "SS 1/standing/West",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "129": {
+            "name": "SS 1/standing/South",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "116": {
+            "name": "Officer 1/standing/East",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "117": {
+            "name": "Officer 1/standing/North",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "118": {
+            "name": "Officer 1/standing/West",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "119": {
+            "name": "Officer 1/standing/South",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "216": {
+            "name": "Mutant 1/standing/East",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "217": {
+            "name": "Mutant 1/standing/North",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "218": {
+            "name": "Mutant 1/standing/West",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "219": {
+            "name": "Mutant 1/standing/South",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "144": {
+            "name": "Guard 3/standing/East",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "145": {
+            "name": "Guard 3/standing/North",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "146": {
+            "name": "Guard 3/standing/West",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "147": {
+            "name": "Guard 3/standing/South",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "162": {
+            "name": "SS 3/standing/East",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "163": {
+            "name": "SS 3/standing/North",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "164": {
+            "name": "SS 3/standing/West",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "165": {
+            "name": "SS 3/standing/South",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "152": {
+            "name": "Officer 3/standing/East",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "153": {
+            "name": "Officer 3/standing/North",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "154": {
+            "name": "Officer 3/standing/West",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "155": {
+            "name": "Officer 3/standing/South",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "234": {
+            "name": "Mutant 3/standing/East",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "235": {
+            "name": "Mutant 3/standing/North",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "236": {
+            "name": "Mutant 3/standing/West",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "237": {
+            "name": "Mutant 3/standing/South",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "180": {
+            "name": "Guard 4/standing/East",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "181": {
+            "name": "Guard 4/standing/North",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "182": {
+            "name": "Guard 4/standing/West",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "183": {
+            "name": "Guard 4/standing/South",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "198": {
+            "name": "SS 4/standing/East",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "199": {
+            "name": "SS 4/standing/North",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "200": {
+            "name": "SS 4/standing/West",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "201": {
+            "name": "SS 4/standing/South",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "188": {
+            "name": "Officer 4/standing/East",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "189": {
+            "name": "Officer 4/standing/North",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "190": {
+            "name": "Officer 4/standing/West",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "191": {
+            "name": "Officer 4/standing/South",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "252": {
+            "name": "Mutant 4/standing/East",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "253": {
+            "name": "Mutant 4/standing/North",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "254": {
+            "name": "Mutant 4/standing/West",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "255": {
+            "name": "Mutant 4/standing/South",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "138": {
+            "name": "Dog 1/moving/East",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "139": {
+            "name": "Dog 1/moving/North",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "140": {
+            "name": "Dog 1/moving/West",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "141": {
+            "name": "Dog 1/moving/South",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "174": {
+            "name": "Dog 3/moving/East",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "175": {
+            "name": "Dog 3/moving/North",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "176": {
+            "name": "Dog 3/moving/West",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "177": {
+            "name": "Dog 3/moving/South",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "210": {
+            "name": "Dog 4/moving/East",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "211": {
+            "name": "Dog 4/moving/North",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "212": {
+            "name": "Dog 4/moving/West",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "213": {
+            "name": "Dog 4/moving/South",
+            "type": "thing",
+            "ednum": 20056,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "112": {
+            "name": "Guard 1/moving/East",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "113": {
+            "name": "Guard 1/moving/North",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "114": {
+            "name": "Guard 1/moving/West",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "115": {
+            "name": "Guard 1/moving/South",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "148": {
+            "name": "Guard 3/moving/East",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "149": {
+            "name": "Guard 3/moving/North",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "150": {
+            "name": "Guard 3/moving/West",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "151": {
+            "name": "Guard 3/moving/South",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "184": {
+            "name": "Guard 4/moving/East",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "185": {
+            "name": "Guard 4/moving/North",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "186": {
+            "name": "Guard 4/moving/West",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "187": {
+            "name": "Guard 4/moving/South",
+            "type": "thing",
+            "ednum": 20034,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "130": {
+            "name": "SS 1/moving/East",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "131": {
+            "name": "SS 1/moving/North",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "132": {
+            "name": "SS 1/moving/West",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "133": {
+            "name": "SS 1/moving/South",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "166": {
+            "name": "SS 3/moving/East",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "167": {
+            "name": "SS 3/moving/North",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "168": {
+            "name": "SS 3/moving/West",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "169": {
+            "name": "SS 3/moving/South",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "202": {
+            "name": "SS 4/moving/East",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "203": {
+            "name": "SS 4/moving/North",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "204": {
+            "name": "SS 4/moving/West",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "205": {
+            "name": "SS 4/moving/South",
+            "type": "thing",
+            "ednum": 20035,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "120": {
+            "name": "Officer 1/moving/East",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "121": {
+            "name": "Officer 1/moving/North",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "122": {
+            "name": "Officer 1/moving/West",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "123": {
+            "name": "Officer 1/moving/South",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "156": {
+            "name": "Officer 3/moving/East",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "157": {
+            "name": "Officer 3/moving/North",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "158": {
+            "name": "Officer 3/moving/West",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "159": {
+            "name": "Officer 3/moving/South",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "192": {
+            "name": "Officer 4/moving/East",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "193": {
+            "name": "Officer 4/moving/North",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "194": {
+            "name": "Officer 4/moving/West",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "195": {
+            "name": "Officer 4/moving/South",
+            "type": "thing",
+            "ednum": 20037,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "220": {
+            "name": "Mutant 1/moving/East",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "221": {
+            "name": "Mutant 1/moving/North",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "222": {
+            "name": "Mutant 1/moving/West",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "223": {
+            "name": "Mutant 1/moving/South",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "238": {
+            "name": "Mutant 3/moving/East",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "239": {
+            "name": "Mutant 3/moving/North",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "240": {
+            "name": "Mutant 3/moving/West",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "241": {
+            "name": "Mutant 3/moving/South",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "256": {
+            "name": "Mutant 4/moving/East",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "257": {
+            "name": "Mutant 4/moving/North",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "258": {
+            "name": "Mutant 4/moving/West",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "259": {
+            "name": "Mutant 4/moving/South",
+            "type": "thing",
+            "ednum": 20036,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "224": {
+            "name": "Red PacMan",
+            "type": "thing",
+            "ednum": 20039,
+            "no_deathmatch": true
+        },
+
+        "227": {
+            "name": "Blue PacMan",
+            "type": "thing",
+            "ednum": 20040,
+            "no_deathmatch": true
+        },
+
+        "226": {
+            "name": "Rose PacMan",
+            "type": "thing",
+            "ednum": 20041,
+            "no_deathmatch": true
+        },
+
+        "225": {
+            "name": "Yellow PacMan",
+            "type": "thing",
+            "ednum": 20042,
+            "no_deathmatch": true
+        },
+
+        "214": {
+            "name": "Hans (gold key)",
+            "type": "thing",
+            "ednum": 20044,
+            "no_deathmatch": true
+        },
+
+        "197": {
+            "name": "Gretl (gold key)",
+            "type": "thing",
+            "ednum": 20049,
+            "no_deathmatch": true
+        },
+
+        "179": {
+            "name": "General Fettgesicht",
+            "type": "thing",
+            "ednum": 20050,
+            "no_deathmatch": true
+        },
+
+        "160": {
+            "name": "Robed Hitler",
+            "type": "thing",
+            "ednum": 20038,
+            "no_deathmatch": true
+        },
+
+        "196": {
+            "name": "Dr. Schabbs",
+            "type": "thing",
+            "ednum": 20045,
+            "no_deathmatch": true
+        },
+
+        "215": {
+            "name": "Otto",
+            "type": "thing",
+            "ednum": 20048,
+            "no_deathmatch": true
+        },
+
+        "178": {
+            "name": "Hitler",
+            "type": "thing",
+            "ednum": 20046,
+            "no_deathmatch": true
+        },
+
+        "19": {
+            "name": "Start position/North",
+            "type": "thing",
+            "ednum": 1,
+            "angle": 90
+        },
+
+        "20": {
+            "name": "Start position/East",
+            "type": "thing",
+            "ednum": 1,
+            "angle": 0
+        },
+
+        "21": {
+            "name": "Start position/South",
+            "type": "thing",
+            "ednum": 1,
+            "angle": 270
+        },
+
+        "22": {
+            "name": "Start position/West",
+            "type": "thing",
+            "ednum": 1,
+            "angle": 180
+        },
+
+        "99": {
+            "name": "Endgame trigger",
+            "type": "exit"
+        }
+    },
+
+    "areas": {
+        "106": {
+            "name": "Floor(deaf guard)",
+            "type": "ambush"
+        },
+
+        "107": {
+            "name": "Elevator to secret floor",
+            "type": "secret_exit",
+            "floor": "FWOLF2",
+            "ceiling": "FWOLF29"
+        }
+    }
+}
