@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv) {
     printf("wolf2wad for WolfenDOOM Redux\n");
-    printf("Usage: wolf2wad -c <file> -i <maphead> <gamemaps> [-l <level>] -o <file>\n");
+    printf("Usage: wolf2wad [-c <file>] [-i <maphead> <gamemaps>] [-l <level>] [-o <file>]\n");
 
     char *config_name = NULL, *maphead_name = NULL, *gamemaps_name = NULL;
     char* output_name = NULL;
