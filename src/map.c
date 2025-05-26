@@ -401,13 +401,13 @@ void map_to_wad(const char* output_name) {
                             // Entrance
                             add_line(
                                 add_vertex((x + 1) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 0) * -64), "-",
-                                doommap.linemap[(y - 1) * wolfmap.width + x].sector, ltrack_sector,
-                                LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                                doommap.linemap[(y - 1) * wolfmap.width + x].sector, ltrack_sector, LF_TWO_SIDED, 0, 0,
+                                0, 0
                             );
                             add_line(
                                 add_vertex((x + 0) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 1) * -64), "-",
-                                doommap.linemap[(y + 1) * wolfmap.width + x].sector, rtrack_sector,
-                                LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                                doommap.linemap[(y + 1) * wolfmap.width + x].sector, rtrack_sector, LF_TWO_SIDED, 0, 0,
+                                0, 0
                             );
 
                             // Side
