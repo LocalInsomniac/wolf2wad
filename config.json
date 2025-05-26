@@ -1782,7 +1782,8 @@
             "name": "Elevator to secret floor",
             "type": "secret_exit",
             "floor": "FWOLF2",
-            "ceiling": "FWOLF29"
+            "ceiling": "FWOLF29",
+            "brightness": 128
         }
     }
 }

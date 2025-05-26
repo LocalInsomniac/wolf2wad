@@ -29,13 +29,12 @@ decompression.
 
 The output may contain the following oddities:
 
-| Oddity                                                                                                                                                                                                    | Example                                       |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| Output does not contain nodes. Get a node builder for that.                                                                                                                                               | Running the output WAD directly on DSDA-Doom. |
-| Ultimate Doom Builder may not properly display sectors (holes, etc.).<br>Otherwise, they work fine.                                                                                                       | Wolfenstein 3D, E3M9                          |
-| Pushwalls won't work properly when there is another pushwall next to it.                                                                                                                                  | Wolfenstein 3D, E1M10                         |
-| If a map's border isn't covered with a tile, it will open a hole in the output.                                                                                                                           | Wolfenstein 3D, E1M3                          |
-| Wolfenstein 3D uses floor codes for sound propagation, so all sectors based on the same floor code are joined (except for ambush floors) and separated between other floors with sound blocking linedefs. | Duhhhhh i dunno duuuuuuhhhhh                  |
+| Oddity                                                                                                                                                                         | Example                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------- |
+| Output won't contain nodes. Get a node builder for that.                                                                                                                       | Running the output WAD directly in DSDA-Doom. |
+| Pushwalls won't work properly when there is another pushwall next to it.                                                                                                       | Wolfenstein 3D, E1M10                         |
+| If a map's border isn't covered with a tile, it will open a hole in the output.                                                                                                | Wolfenstein 3D, E1M3                          |
+| Wolfenstein 3D uses floor codes for sound propagation, so all sectors based on the same floor code are joined and separated between other floors with sound blocking linedefs. | Duhhhhh i dunno duuuuuuhhhhh                  |
 
 wolf2wad always assumes the level design to be sane, so things like doors
 placed next to each other don't have a failsafe.

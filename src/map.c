@@ -223,11 +223,8 @@ void map_to_wad(const char* output_name) {
                 mobj->angle = obj->angle;
                 mobj->ednum = obj->ednum;
                 mobj->flags = (uint16_t)obj->flags;
-                if (wolfmap.planes[PLANE_WALLS] != NULL) {
-                    const struct AreaInfo* area = get_area_info(wolfmap.planes[PLANE_WALLS][pos]);
-                    if (area != NULL && area->type == AREA_AMBUSH)
-                        mobj->flags |= TF_AMBUSH;
-                }
+                if (wolfmap.planes[PLANE_WALLS] != NULL && aid_is_ambush(wolfmap.planes[PLANE_WALLS][pos]))
+                    mobj->flags |= TF_AMBUSH;
             }
         }
 
@@ -251,27 +248,54 @@ void map_to_wad(const char* output_name) {
             for (int16_t y = 0; y < wolfmap.height; y++) {
                 size_t pos = y * wolfmap.width + x;
                 uint16_t id = wolfmap.planes[PLANE_WALLS][pos];
+                struct LineCell* cell = &doommap.linemap[pos];
 
-                doommap.linemap[pos].tile = id;
+                cell->tile = id;
+                cell->wall = get_wall_info(id);
+                cell->door = (cell->wall == NULL ? get_door_info(id) : NULL);
+                cell->area = ((cell->wall == NULL && cell->door == NULL) ? get_area_info(id) : NULL);
 
-                const struct WallInfo* wall = get_wall_info(id);
-                doommap.linemap[pos].wall = wall;
-                const struct DoorInfo* door = wall == NULL ? get_door_info(id) : NULL;
-                doommap.linemap[pos].door = door;
-                doommap.linemap[pos].area = (wall == NULL && door == NULL) ? get_area_info(id) : NULL;
-
-                doommap.linemap[pos].sector =
-                    (wall == NULL ||
+                if ((cell->wall == NULL ||
                      (wolfmap.planes[PLANE_OBJECTS] != NULL && oid_is_pushwall(wolfmap.planes[PLANE_OBJECTS][pos]))) &&
-                            door == NULL
-                        ? add_custom_sector(
-                              (wall != NULL || aid_is_ambush(wolfmap.planes[PLANE_WALLS][pos])) ? doommap.last_asector--
-                                                                                                : id,
-                              0, wall == NULL ? 64 : 0, get_config()->flats[FLAT_FLOOR],
-                              get_config()->flats[FLAT_CEILING], get_config()->brightness,
-                              wall == NULL ? ST_NORMAL : ST_SECRET, 0
-                          )
-                        : NO_SECTOR;
+                    cell->door == NULL) {
+                    uint16_t sector_id;
+                    if (cell->wall != NULL) {
+                        sector_id = doommap.last_asector--;
+                    } else if (cell->area != NULL && cell->area->type == AREA_AMBUSH) {
+                        struct LineCell* neighbor;
+                        if ((y > 0 && (neighbor = &doommap.linemap[(y - 1) * wolfmap.width + x])->wall == NULL &&
+                             neighbor->door == NULL) ||
+                            (x > 0 && (neighbor = &doommap.linemap[y * wolfmap.width + (x - 1)])->wall == NULL &&
+                             neighbor->door == NULL)) {
+                            sector_id = cell->tile = neighbor->tile;
+                            cell->area = neighbor->area;
+                        } else if ((y < (wolfmap.height - 1) &&
+                                    get_wall_info(id = (wolfmap.planes[PLANE_WALLS][(y + 1) * wolfmap.width + x])) ==
+                                        NULL &&
+                                    get_door_info(id) == NULL && !aid_is_ambush(id)) ||
+                                   (x < (wolfmap.width - 1) &&
+                                    get_wall_info(id = (wolfmap.planes[PLANE_WALLS][y * wolfmap.width + (x + 1)])) ==
+                                        NULL &&
+                                    get_door_info(id) == NULL && !aid_is_ambush(id))) {
+                            sector_id = cell->tile = id;
+                            cell->area = get_area_info(id);
+                        } else {
+                            sector_id = doommap.last_asector--;
+                        }
+                    } else {
+                        sector_id = id;
+                    }
+
+                    cell->sector = add_custom_sector(
+                        sector_id, 0, cell->wall == NULL ? 64 : 0,
+                        cell->area == NULL ? get_config()->flats[FLAT_FLOOR] : cell->area->flats[FLAT_FLOOR],
+                        cell->area == NULL ? get_config()->flats[FLAT_CEILING] : cell->area->flats[FLAT_CEILING],
+                        cell->area == NULL ? get_config()->brightness : cell->area->brightness,
+                        cell->wall == NULL ? ST_NORMAL : ST_SECRET, 0
+                    );
+                } else {
+                    cell->sector = NO_SECTOR;
+                }
             }
         }
 
@@ -847,7 +871,8 @@ uint16_t add_line(
 
     size_t i;
     for (i = 0; i < doommap.num_lines; i++)
-        if (doommap.lines[i].start == start && doommap.lines[i].end == end)
+        if ((doommap.lines[i].start == start && doommap.lines[i].end == end) ||
+            (doommap.lines[i].start == end && doommap.lines[i].end == start && doommap.lines[i].flags == LF_TWO_SIDED))
             return i;
 
     doommap.lines = realloc(doommap.lines, ++doommap.num_lines * sizeof(struct DoomLine));
