@@ -45,6 +45,12 @@
 #define LT_DOOR_RED 28
 #define LT_DOOR_YELLOW 27
 #define LT_DOOR_BLUE 26
+#define LT_DOOR_RED_CARD 14407
+#define LT_DOOR_YELLOW_CARD 14535
+#define LT_DOOR_BLUE_CARD 14471
+#define LT_DOOR_RED_SKULL 14599
+#define LT_DOOR_YELLOW_SKULL 14727
+#define LT_DOOR_BLUE_SKULL 14663
 #define LT_SWITCH 103
 #define LT_SECRET 118
 #define LT_EXIT 11
@@ -97,8 +103,10 @@ struct LineCell {
     const struct WallInfo* wall;
     const struct DoorInfo* door;
 
+    bool secret;
     uint16_t sector;
     bool fright, ftop, fleft, fbottom;
+    bool sright, stop, sleft, sbottom;
     int16_t right, top, left, bottom;
 };
 
@@ -124,8 +132,8 @@ void read_carmack(FILE*, size_t, size_t, uint8_t*);
 void read_rlew(uint8_t*, uint8_t*, uint16_t);
 
 void map_to_wad(const char*);
-bool place_free(int, int);
-bool floor_free(uint16_t, int, int);
+bool place_free(struct LineCell*, int, int);
+bool floor_free(struct LineCell*, int, int);
 
 void write_string(FILE*, const char*, size_t);
 void write_u16le(FILE*, uint16_t);
@@ -134,6 +142,9 @@ void write_u32le(FILE*, uint32_t);
 
 uint16_t add_vertex(int16_t, int16_t);
 uint16_t add_side(const char*, const char*, const char*, uint16_t, int16_t, int16_t);
-uint16_t add_line(uint16_t, uint16_t, const char*, uint16_t, uint16_t, uint16_t, uint16_t, uint16_t, int16_t, int16_t);
+uint16_t add_line(
+    uint16_t, uint16_t, const char*, const char*, const char*, const char*, const char*, const char*, uint16_t,
+    uint16_t, uint16_t, uint16_t, uint16_t, int16_t, int16_t
+);
 uint16_t add_sector(struct AreaInfo*);
 uint16_t add_custom_sector(uint16_t, int16_t, int16_t, const char*, const char*, uint16_t, uint16_t, uint16_t);

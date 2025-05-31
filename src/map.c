@@ -252,297 +252,325 @@ void map_to_wad(const char* output_name) {
 
                 cell->tile = id;
                 cell->wall = get_wall_info(id);
-                cell->door = (cell->wall == NULL ? get_door_info(id) : NULL);
-                cell->area = ((cell->wall == NULL && cell->door == NULL) ? get_area_info(id) : NULL);
+                cell->door = cell->wall == NULL ? get_door_info(id) : NULL;
+                cell->area = ((cell->wall == NULL || cell->wall->type == WALL_MIDTEX) && cell->door == NULL)
+                                 ? get_area_info(id)
+                                 : NULL;
+                cell->secret =
+                    wolfmap.planes[PLANE_OBJECTS] != NULL && oid_is_pushwall(wolfmap.planes[PLANE_OBJECTS][pos]);
 
-                if ((cell->wall == NULL ||
-                     (wolfmap.planes[PLANE_OBJECTS] != NULL && oid_is_pushwall(wolfmap.planes[PLANE_OBJECTS][pos]))) &&
-                    cell->door == NULL) {
-                    uint16_t sector_id;
-                    if (cell->wall != NULL) {
-                        sector_id = doommap.last_asector--;
-                    } else if (cell->area != NULL && cell->area->type == AREA_AMBUSH) {
-                        struct LineCell* neighbor;
-                        if ((y > 0 && (neighbor = &doommap.linemap[(y - 1) * wolfmap.width + x])->wall == NULL &&
-                             neighbor->door == NULL) ||
-                            (x > 0 && (neighbor = &doommap.linemap[y * wolfmap.width + (x - 1)])->wall == NULL &&
-                             neighbor->door == NULL)) {
-                            sector_id = cell->tile = neighbor->tile;
-                            cell->area = neighbor->area;
-                        } else if ((y < (wolfmap.height - 1) &&
-                                    get_wall_info(id = (wolfmap.planes[PLANE_WALLS][(y + 1) * wolfmap.width + x])) ==
-                                        NULL &&
-                                    get_door_info(id) == NULL && !aid_is_ambush(id)) ||
-                                   (x < (wolfmap.width - 1) &&
-                                    get_wall_info(id = (wolfmap.planes[PLANE_WALLS][y * wolfmap.width + (x + 1)])) ==
-                                        NULL &&
-                                    get_door_info(id) == NULL && !aid_is_ambush(id))) {
-                            sector_id = cell->tile = id;
-                            cell->area = get_area_info(id);
-                        } else {
-                            sector_id = doommap.last_asector--;
-                        }
+                uint16_t sector_id;
+                if (cell->door != NULL || cell->secret) {
+                    sector_id = doommap.last_asector--;
+                } else if (cell->wall != NULL) {
+                    sector_id = cell->wall->type == WALL_MIDTEX ? id : NO_SECTOR;
+                } else if (cell->area != NULL && cell->area->type == AREA_AMBUSH) {
+                    struct LineCell* neighbor;
+                    if ((y > 0 && (neighbor = &doommap.linemap[(y - 1) * wolfmap.width + x])->wall == NULL &&
+                         neighbor->door == NULL) ||
+                        (x > 0 && (neighbor = &doommap.linemap[y * wolfmap.width + (x - 1)])->wall == NULL &&
+                         neighbor->door == NULL)) {
+                        sector_id = cell->tile = neighbor->tile;
+                        cell->area = neighbor->area;
+                    } else if ((y < (wolfmap.height - 1) &&
+                                get_wall_info(id = (wolfmap.planes[PLANE_WALLS][(y + 1) * wolfmap.width + x])) ==
+                                    NULL &&
+                                get_door_info(id) == NULL && !aid_is_ambush(id)) ||
+                               (x < (wolfmap.width - 1) &&
+                                get_wall_info(id = (wolfmap.planes[PLANE_WALLS][y * wolfmap.width + (x + 1)])) ==
+                                    NULL &&
+                                get_door_info(id) == NULL && !aid_is_ambush(id))) {
+                        sector_id = cell->tile = id;
+                        cell->area = get_area_info(id);
                     } else {
-                        sector_id = id;
+                        sector_id = doommap.last_asector--;
                     }
-
-                    cell->sector = add_custom_sector(
-                        sector_id, 0, cell->wall == NULL ? 64 : 0,
-                        cell->area == NULL ? get_config()->flats[FLAT_FLOOR] : cell->area->flats[FLAT_FLOOR],
-                        cell->area == NULL ? get_config()->flats[FLAT_CEILING] : cell->area->flats[FLAT_CEILING],
-                        cell->area == NULL ? get_config()->brightness : cell->area->brightness,
-                        cell->wall == NULL ? ST_NORMAL : ST_SECRET, 0
-                    );
                 } else {
-                    cell->sector = NO_SECTOR;
+                    sector_id = id;
+                }
+
+                cell->sector = sector_id == NO_SECTOR
+                                   ? NO_SECTOR
+                                   : add_custom_sector(
+                                         sector_id, 0, (cell->door == NULL && !cell->secret) ? 64 : 0,
+                                         cell->door == NULL ? (cell->area == NULL ? get_config()->flats[FLAT_FLOOR]
+                                                                                  : cell->area->flats[FLAT_FLOOR])
+                                                            : cell->door->flats[FLAT_FLOOR],
+                                         cell->door == NULL ? (cell->area == NULL ? get_config()->flats[FLAT_CEILING]
+                                                                                  : cell->area->flats[FLAT_CEILING])
+                                                            : cell->door->flats[FLAT_CEILING],
+                                         cell->area == NULL ? get_config()->brightness : cell->area->brightness,
+                                         cell->secret ? ST_SECRET : ST_NORMAL, cell->door != NULL ? cell->door->tag : 0
+                                     );
+            }
+        }
+
+        // Second pass: Check space
+        for (int16_t x = 0; x < wolfmap.width; x++) {
+            for (int16_t y = 0; y < wolfmap.height; y++) {
+                struct LineCell* cell = &doommap.linemap[y * wolfmap.width + x];
+
+                if (cell->wall != NULL) {
+                    cell->fright = place_free(cell, x + 1, y);
+                    cell->ftop = place_free(cell, x, y - 1);
+                    cell->fleft = place_free(cell, x - 1, y);
+                    cell->fbottom = place_free(cell, x, y + 1);
+                }
+
+                if (cell->sector != NO_SECTOR) {
+                    cell->sright = (!cell->fright && floor_free(cell, x + 1, y));
+                    cell->stop = (!cell->ftop && floor_free(cell, x, y - 1));
+                    cell->sleft = (!cell->fleft && floor_free(cell, x - 1, y));
+                    cell->sbottom = (!cell->fbottom && floor_free(cell, x, y + 1));
                 }
             }
         }
 
-        // Second pass: Make linedefs
+        // Third pass: Make linedefs
         for (int16_t x = 0; x < wolfmap.width; x++) {
             for (int16_t y = 0; y < wolfmap.height; y++) {
                 size_t pos = y * wolfmap.width + x;
                 struct LineCell* cell = &doommap.linemap[pos];
 
-                if (cell->wall == NULL) {
-                    if (cell->door != NULL) {
-                        uint16_t ltrack_sector = add_custom_sector(
-                            doommap.last_asector--, 0, 64, get_config()->flats[FLAT_FLOOR],
-                            get_config()->flats[FLAT_CEILING], get_config()->brightness, ST_NORMAL, 0
-                        );
+                if (cell->door != NULL) {
+                    uint16_t ltrack_sector = add_custom_sector(
+                        doommap.last_asector--, 0, 64, get_config()->flats[FLAT_FLOOR],
+                        get_config()->flats[FLAT_CEILING], get_config()->brightness, ST_NORMAL, 0
+                    );
 
-                        uint16_t rtrack_sector = add_custom_sector(
-                            doommap.last_asector--, 0, 64, get_config()->flats[FLAT_FLOOR],
-                            get_config()->flats[FLAT_CEILING], get_config()->brightness, ST_NORMAL, 0
-                        );
+                    uint16_t rtrack_sector = add_custom_sector(
+                        doommap.last_asector--, 0, 64, get_config()->flats[FLAT_FLOOR],
+                        get_config()->flats[FLAT_CEILING], get_config()->brightness, ST_NORMAL, 0
+                    );
 
-                        uint16_t door_sector = add_custom_sector(
-                            doommap.last_asector--, 0, 0, cell->door->flats[FLAT_FLOOR],
-                            cell->door->flats[FLAT_CEILING], get_config()->brightness, ST_NORMAL, 0
-                        );
-
-                        cell->sector = door_sector;
-
-                        uint16_t action;
-                        switch (cell->door->type) {
-                            default:
-                            case DOOR_NORMAL:
-                                action = LT_DOOR;
-                                break;
-                            case DOOR_FAST:
-                                action = LT_DOOR_FAST;
-                                break;
-                            case DOOR_RED:
-                                action = LT_DOOR_RED;
-                                break;
-                            case DOOR_YELLOW:
-                                action = LT_DOOR_YELLOW;
-                                break;
-                            case DOOR_BLUE:
-                                action = LT_DOOR_BLUE;
-                                break;
-                        }
-
-                        if (cell->door->axis == DAX_Y) {
-                            // Entrance
-                            add_line(
-                                add_vertex((x + 0) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 1) * -64), "-",
-                                doommap.linemap[y * wolfmap.width + (x - 1)].sector, ltrack_sector, LF_TWO_SIDED, 0, 0,
-                                0, 0
-                            );
-                            add_line(
-                                add_vertex((x + 1) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 0) * -64), "-",
-                                doommap.linemap[y * wolfmap.width + (x + 1)].sector, rtrack_sector, LF_TWO_SIDED, 0, 0,
-                                0, 0
-                            );
-
-                            // Side
-                            add_line(
-                                add_vertex((x + 0) * 64, (y + 0) * -64), add_vertex((x + 0) * 64 + 29, (y + 0) * -64),
-                                cell->door->track, ltrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW, 0, 0, 0, 0
-                            );
-                            add_line(
-                                add_vertex((x + 0) * 64 + 35, (y + 0) * -64), add_vertex((x + 1) * 64, (y + 0) * -64),
-                                cell->door->track, rtrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW, 0, 0, 35, 0
-                            );
-
-                            add_line(
-                                add_vertex((x + 1) * 64, (y + 1) * -64), add_vertex((x + 0) * 64 + 35, (y + 1) * -64),
-                                cell->door->track, rtrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW, 0, 0, 0, 0
-                            );
-                            add_line(
-                                add_vertex((x + 0) * 64 + 29, (y + 1) * -64), add_vertex((x + 0) * 64, (y + 1) * -64),
-                                cell->door->track, ltrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW, 0, 0, 35, 0
-                            );
-
-                            // Door
-                            add_line(
-                                add_vertex((x + 0) * 64 + 29, (y + 0) * -64),
-                                add_vertex((x + 0) * 64 + 29, (y + 1) * -64), cell->door->sides[SIDE_LEFT],
-                                ltrack_sector, door_sector, LF_TWO_SIDED, action, 0, 0, 0
-                            );
-                            add_line(
-                                add_vertex((x + 0) * 64 + 35, (y + 1) * -64),
-                                add_vertex((x + 0) * 64 + 35, (y + 0) * -64), cell->door->sides[SIDE_RIGHT],
-                                rtrack_sector, door_sector, LF_TWO_SIDED, action, 0, 0, 0
-                            );
-                            add_line(
-                                add_vertex((x + 0) * 64 + 29, (y + 0) * -64),
-                                add_vertex((x + 0) * 64 + 35, (y + 0) * -64), cell->door->track, door_sector, NO_SECTOR,
-                                LF_BLOCKING | LF_UNPEG_LOW, LT_NORMAL, 0, 29, 0
-                            );
-                            add_line(
-                                add_vertex((x + 0) * 64 + 35, (y + 1) * -64),
-                                add_vertex((x + 0) * 64 + 29, (y + 1) * -64), cell->door->track, door_sector, NO_SECTOR,
-                                LF_BLOCKING | LF_UNPEG_LOW, LT_NORMAL, 0, 29, 0
-                            );
-                        } else if (cell->door->axis == DAX_X) {
-                            // Entrance
-                            add_line(
-                                add_vertex((x + 1) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 0) * -64), "-",
-                                doommap.linemap[(y - 1) * wolfmap.width + x].sector, ltrack_sector, LF_TWO_SIDED, 0, 0,
-                                0, 0
-                            );
-                            add_line(
-                                add_vertex((x + 0) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 1) * -64), "-",
-                                doommap.linemap[(y + 1) * wolfmap.width + x].sector, rtrack_sector, LF_TWO_SIDED, 0, 0,
-                                0, 0
-                            );
-
-                            // Side
-                            add_line(
-                                add_vertex((x + 0) * 64, (y + 1) * -64), add_vertex((x + 0) * 64, (y + 0) * -64 - 35),
-                                cell->door->track, rtrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW, 0, 0, 0, 0
-                            );
-                            add_line(
-                                add_vertex((x + 0) * 64, (y + 0) * -64 - 29), add_vertex((x + 0) * 64, (y + 0) * -64),
-                                cell->door->track, ltrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW, 0, 0, 35, 0
-                            );
-                            add_line(
-                                add_vertex((x + 1) * 64, (y + 0) * -64 - 35), add_vertex((x + 1) * 64, (y + 1) * -64),
-                                cell->door->track, rtrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW, 0, 0, 35, 0
-                            );
-                            add_line(
-                                add_vertex((x + 1) * 64, (y + 0) * -64), add_vertex((x + 1) * 64, (y + 0) * -64 - 29),
-                                cell->door->track, ltrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW, 0, 0, 0, 0
-                            );
-
-                            // Door
-                            add_line(
-                                add_vertex((x + 1) * 64, (y + 0) * -64 - 29),
-                                add_vertex((x + 0) * 64, (y + 0) * -64 - 29), cell->door->sides[SIDE_RIGHT],
-                                ltrack_sector, door_sector, LF_TWO_SIDED, action, 0, 0, 0
-                            );
-                            add_line(
-                                add_vertex((x + 0) * 64, (y + 0) * -64 - 35),
-                                add_vertex((x + 1) * 64, (y + 0) * -64 - 35), cell->door->sides[SIDE_LEFT],
-                                rtrack_sector, door_sector, LF_TWO_SIDED, action, 0, 0, 0
-                            );
-                            add_line(
-                                add_vertex((x + 0) * 64, (y + 0) * -64 - 35),
-                                add_vertex((x + 0) * 64, (y + 0) * -64 - 29), cell->door->track, door_sector, NO_SECTOR,
-                                LF_BLOCKING | LF_UNPEG_LOW, LT_NORMAL, 0, 29, 0
-                            );
-                            add_line(
-                                add_vertex((x + 1) * 64, (y + 0) * -64 - 29),
-                                add_vertex((x + 1) * 64, (y + 0) * -64 - 35), cell->door->track, door_sector, NO_SECTOR,
-                                LF_BLOCKING | LF_UNPEG_LOW, LT_NORMAL, 0, 29, 0
-                            );
-                        }
-
-                        continue;
+                    uint16_t action;
+                    switch (cell->door->type) {
+                        default:
+                        case DOOR_NORMAL:
+                            action = LT_DOOR;
+                            break;
+                        case DOOR_FAST:
+                            action = LT_DOOR_FAST;
+                            break;
+                        case DOOR_RED:
+                            action = LT_DOOR_RED;
+                            break;
+                        case DOOR_YELLOW:
+                            action = LT_DOOR_YELLOW;
+                            break;
+                        case DOOR_BLUE:
+                            action = LT_DOOR_BLUE;
+                            break;
+                        case DOOR_RED_CARD:
+                            action = LT_DOOR_RED_CARD;
+                            break;
+                        case DOOR_YELLOW_CARD:
+                            action = LT_DOOR_YELLOW_CARD;
+                            break;
+                        case DOOR_BLUE_CARD:
+                            action = LT_DOOR_BLUE_CARD;
+                            break;
+                        case DOOR_RED_SKULL:
+                            action = LT_DOOR_RED_SKULL;
+                            break;
+                        case DOOR_YELLOW_SKULL:
+                            action = LT_DOOR_YELLOW_SKULL;
+                            break;
+                        case DOOR_BLUE_SKULL:
+                            action = LT_DOOR_BLUE_SKULL;
+                            break;
                     }
 
-                    if (cell->sector != NO_SECTOR) {
-                        cell->fright = floor_free(cell->sector, x + 1, y);
-                        cell->ftop = floor_free(cell->sector, x, y - 1);
-                        cell->fleft = floor_free(cell->sector, x - 1, y);
-                        cell->fbottom = floor_free(cell->sector, x, y + 1);
+                    if (cell->door->axis == DAX_Y) {
+                        // Entrance
+                        add_line(
+                            add_vertex((x + 0) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 1) * -64), "-", "-",
+                            "-", "-", "-", "-", doommap.linemap[y * wolfmap.width + (x - 1)].sector, ltrack_sector,
+                            LF_TWO_SIDED, 0, 0, 0, 0
+                        );
+                        add_line(
+                            add_vertex((x + 1) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 0) * -64), "-", "-",
+                            "-", "-", "-", "-", doommap.linemap[y * wolfmap.width + (x + 1)].sector, rtrack_sector,
+                            LF_TWO_SIDED, 0, 0, 0, 0
+                        );
 
-                        struct LineCell* neighbor;
-                        if (cell->fright) {
-                            neighbor = y <= 0 ? NULL : &doommap.linemap[(y - 1) * wolfmap.width + x];
+                        // Side
+                        add_line(
+                            add_vertex((x + 0) * 64, (y + 0) * -64), add_vertex((x + 0) * 64 + 29, (y + 0) * -64), "-",
+                            cell->door->track, "-", "-", "-", "-", ltrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW,
+                            0, 0, 0, 0
+                        );
+                        add_line(
+                            add_vertex((x + 0) * 64 + 35, (y + 0) * -64), add_vertex((x + 1) * 64, (y + 0) * -64), "-",
+                            cell->door->track, "-", "-", "-", "-", rtrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW,
+                            0, 0, 35, 0
+                        );
+                        add_line(
+                            add_vertex((x + 1) * 64, (y + 1) * -64), add_vertex((x + 0) * 64 + 35, (y + 1) * -64), "-",
+                            cell->door->track, "-", "-", "-", "-", rtrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW,
+                            0, 0, 0, 0
+                        );
+                        add_line(
+                            add_vertex((x + 0) * 64 + 29, (y + 1) * -64), add_vertex((x + 0) * 64, (y + 1) * -64), "-",
+                            cell->door->track, "-", "-", "-", "-", ltrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW,
+                            0, 0, 35, 0
+                        );
 
-                            if (neighbor != NULL && neighbor->fright && neighbor->sector == cell->sector &&
-                                doommap.linemap[y * wolfmap.width + (x + 1)].tile ==
-                                    doommap.linemap[(y - 1) * wolfmap.width + (x + 1)].tile) {
-                                cell->right = neighbor->right;
-                                doommap.lines[cell->right].start = add_vertex((x + 1) * 64, (y + 1) * -64);
-                            } else {
-                                cell->right = add_line(
-                                    add_vertex((x + 1) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 0) * -64),
-                                    "-",
-                                    (x + 1) >= wolfmap.width ? NO_SECTOR
-                                                             : doommap.linemap[y * wolfmap.width + (x + 1)].sector,
-                                    cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
-                                );
-                            }
-                        }
+                        // Door
+                        add_line(
+                            add_vertex((x + 0) * 64 + 29, (y + 0) * -64), add_vertex((x + 0) * 64 + 29, (y + 1) * -64),
+                            cell->door->sides[SIDE_LEFT], "-", "-", "-", "-", "-", ltrack_sector, cell->sector,
+                            LF_TWO_SIDED, action, 0, 0, 0
+                        );
+                        add_line(
+                            add_vertex((x + 0) * 64 + 35, (y + 1) * -64), add_vertex((x + 0) * 64 + 35, (y + 0) * -64),
+                            cell->door->sides[SIDE_RIGHT], "-", "-", "-", "-", "-", rtrack_sector, cell->sector,
+                            LF_TWO_SIDED, action, 0, 0, 0
+                        );
+                        add_line(
+                            add_vertex((x + 0) * 64 + 29, (y + 0) * -64), add_vertex((x + 0) * 64 + 35, (y + 0) * -64),
+                            "-", cell->door->track, "-", "-", "-", "-", cell->sector, NO_SECTOR,
+                            LF_BLOCKING | LF_UNPEG_LOW, LT_NORMAL, 0, 29, 0
+                        );
+                        add_line(
+                            add_vertex((x + 0) * 64 + 35, (y + 1) * -64), add_vertex((x + 0) * 64 + 29, (y + 1) * -64),
+                            "-", cell->door->track, "-", "-", "-", "-", cell->sector, NO_SECTOR,
+                            LF_BLOCKING | LF_UNPEG_LOW, LT_NORMAL, 0, 29, 0
+                        );
+                    } else if (cell->door->axis == DAX_X) {
+                        // Entrance
+                        add_line(
+                            add_vertex((x + 1) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 0) * -64), "-", "-",
+                            "-", "-", "-", "-", doommap.linemap[(y - 1) * wolfmap.width + x].sector, ltrack_sector,
+                            LF_TWO_SIDED, 0, 0, 0, 0
+                        );
+                        add_line(
+                            add_vertex((x + 0) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 1) * -64), "-", "-",
+                            "-", "-", "-", "-", doommap.linemap[(y + 1) * wolfmap.width + x].sector, rtrack_sector,
+                            LF_TWO_SIDED, 0, 0, 0, 0
+                        );
 
-                        if (cell->ftop) {
-                            neighbor = x <= 0 ? NULL : &doommap.linemap[y * wolfmap.width + (x - 1)];
+                        // Side
+                        add_line(
+                            add_vertex((x + 0) * 64, (y + 1) * -64), add_vertex((x + 0) * 64, (y + 0) * -64 - 35), "-",
+                            cell->door->track, "-", "-", "-", "-", rtrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW,
+                            0, 0, 0, 0
+                        );
+                        add_line(
+                            add_vertex((x + 0) * 64, (y + 0) * -64 - 29), add_vertex((x + 0) * 64, (y + 0) * -64), "-",
+                            cell->door->track, "-", "-", "-", "-", ltrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW,
+                            0, 0, 35, 0
+                        );
+                        add_line(
+                            add_vertex((x + 1) * 64, (y + 0) * -64 - 35), add_vertex((x + 1) * 64, (y + 1) * -64), "-",
+                            cell->door->track, "-", "-", "-", "-", rtrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW,
+                            0, 0, 35, 0
+                        );
+                        add_line(
+                            add_vertex((x + 1) * 64, (y + 0) * -64), add_vertex((x + 1) * 64, (y + 0) * -64 - 29), "-",
+                            cell->door->track, "-", "-", "-", "-", ltrack_sector, NO_SECTOR, LF_BLOCKING | LF_UNPEG_LOW,
+                            0, 0, 0, 0
+                        );
 
-                            if (neighbor != NULL && neighbor->ftop && neighbor->sector == cell->sector &&
-                                doommap.linemap[(y - 1) * wolfmap.width + x].tile ==
-                                    doommap.linemap[(y - 1) * wolfmap.width + (x - 1)].tile) {
-                                cell->top = neighbor->top;
-                                doommap.lines[cell->top].start = add_vertex((x + 1) * 64, (y + 0) * -64);
-                            } else {
-                                cell->top = add_line(
-                                    add_vertex((x + 1) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 0) * -64),
-                                    "-", (y - 1) < 0 ? NO_SECTOR : doommap.linemap[(y - 1) * wolfmap.width + x].sector,
-                                    cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
-                                );
-                            }
-                        }
+                        // Door
+                        add_line(
+                            add_vertex((x + 1) * 64, (y + 0) * -64 - 29), add_vertex((x + 0) * 64, (y + 0) * -64 - 29),
+                            cell->door->sides[SIDE_RIGHT], "-", "-", "-", "-", "-", ltrack_sector, cell->sector,
+                            LF_TWO_SIDED, action, 0, 0, 0
+                        );
+                        add_line(
+                            add_vertex((x + 0) * 64, (y + 0) * -64 - 35), add_vertex((x + 1) * 64, (y + 0) * -64 - 35),
+                            cell->door->sides[SIDE_LEFT], "-", "-", "-", "-", "-", rtrack_sector, cell->sector,
+                            LF_TWO_SIDED, action, 0, 0, 0
+                        );
+                        add_line(
+                            add_vertex((x + 0) * 64, (y + 0) * -64 - 35), add_vertex((x + 0) * 64, (y + 0) * -64 - 29),
+                            "-", cell->door->track, "-", "-", "-", "-", cell->sector, NO_SECTOR,
+                            LF_BLOCKING | LF_UNPEG_LOW, LT_NORMAL, 0, 29, 0
+                        );
+                        add_line(
+                            add_vertex((x + 1) * 64, (y + 0) * -64 - 29), add_vertex((x + 1) * 64, (y + 0) * -64 - 35),
+                            "-", cell->door->track, "-", "-", "-", "-", cell->sector, NO_SECTOR,
+                            LF_BLOCKING | LF_UNPEG_LOW, LT_NORMAL, 0, 29, 0
+                        );
+                    }
 
-                        if (cell->fleft) {
-                            neighbor = y <= 0 ? NULL : &doommap.linemap[(y - 1) * wolfmap.width + x];
+                    continue;
+                }
 
-                            if (neighbor != NULL && neighbor->fleft && neighbor->sector == cell->sector &&
-                                doommap.linemap[y * wolfmap.width + (x - 1)].tile ==
-                                    doommap.linemap[(y - 1) * wolfmap.width + (x - 1)].tile) {
-                                cell->left = neighbor->left;
-                                doommap.lines[cell->left].end = add_vertex((x + 0) * 64, (y + 1) * -64);
-                            } else {
-                                cell->left = add_line(
-                                    add_vertex((x + 0) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 1) * -64),
-                                    "-", (x - 1) < 0 ? NO_SECTOR : doommap.linemap[y * wolfmap.width + (x - 1)].sector,
-                                    cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
-                                );
-                            }
-                        }
+                struct LineCell* neighbor;
+                if (cell->sright) {
+                    neighbor = y <= 0 ? NULL : &doommap.linemap[(y - 1) * wolfmap.width + x];
 
-                        if (cell->fbottom) {
-                            neighbor = x <= 0 ? NULL : &doommap.linemap[y * wolfmap.width + (x - 1)];
-
-                            if (neighbor != NULL && neighbor->fbottom && neighbor->sector == cell->sector &&
-                                doommap.linemap[(y + 1) * wolfmap.width + x].tile ==
-                                    doommap.linemap[(y + 1) * wolfmap.width + (x - 1)].tile) {
-                                cell->bottom = neighbor->bottom;
-                                doommap.lines[cell->bottom].end = add_vertex((x + 1) * 64, (y + 1) * -64);
-                            } else {
-                                cell->bottom = add_line(
-                                    add_vertex((x + 0) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 1) * -64),
-                                    "-",
-                                    (y + 1) >= wolfmap.height ? NO_SECTOR
-                                                              : doommap.linemap[(y + 1) * wolfmap.width + x].sector,
-                                    cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
-                                );
-                            }
-                        }
-
-                        continue;
+                    if (neighbor != NULL && neighbor->sright && neighbor->sector == cell->sector &&
+                        (x >= (wolfmap.width - 1) || doommap.linemap[y * wolfmap.width + (x + 1)].tile ==
+                                                         doommap.linemap[(y - 1) * wolfmap.width + (x + 1)].tile)) {
+                        cell->right = neighbor->right;
+                        doommap.lines[cell->right].start = add_vertex((x + 1) * 64, (y + 1) * -64);
+                    } else {
+                        cell->right = add_line(
+                            add_vertex((x + 1) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 0) * -64), "-", "-",
+                            "-", "-", "-", "-",
+                            (x + 1) >= wolfmap.width ? NO_SECTOR : doommap.linemap[y * wolfmap.width + (x + 1)].sector,
+                            cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                        );
                     }
                 }
 
-                cell->fright = place_free(x + 1, y);
-                cell->ftop = place_free(x, y - 1);
-                cell->fleft = place_free(x - 1, y);
-                cell->fbottom = place_free(x, y + 1);
+                if (cell->stop) {
+                    neighbor = x <= 0 ? NULL : &doommap.linemap[y * wolfmap.width + (x - 1)];
 
-                struct LineCell* neighbor;
+                    if (neighbor != NULL && neighbor->stop && neighbor->sector == cell->sector &&
+                        (y <= 0 || doommap.linemap[(y - 1) * wolfmap.width + x].tile ==
+                                       doommap.linemap[(y - 1) * wolfmap.width + (x - 1)].tile)) {
+                        cell->top = neighbor->top;
+                        doommap.lines[cell->top].start = add_vertex((x + 1) * 64, (y + 0) * -64);
+                    } else {
+                        cell->top = add_line(
+                            add_vertex((x + 1) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 0) * -64), "-", "-",
+                            "-", "-", "-", "-",
+                            (y - 1) < 0 ? NO_SECTOR : doommap.linemap[(y - 1) * wolfmap.width + x].sector, cell->sector,
+                            LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                        );
+                    }
+                }
+
+                if (cell->sleft) {
+                    neighbor = y <= 0 ? NULL : &doommap.linemap[(y - 1) * wolfmap.width + x];
+
+                    if (neighbor != NULL && neighbor->sleft && neighbor->sector == cell->sector &&
+                        (x <= 0 || doommap.linemap[y * wolfmap.width + (x - 1)].tile ==
+                                       doommap.linemap[(y - 1) * wolfmap.width + (x - 1)].tile)) {
+                        cell->left = neighbor->left;
+                        doommap.lines[cell->left].end = add_vertex((x + 0) * 64, (y + 1) * -64);
+                    } else {
+                        cell->left = add_line(
+                            add_vertex((x + 0) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 1) * -64), "-", "-",
+                            "-", "-", "-", "-",
+                            (x - 1) < 0 ? NO_SECTOR : doommap.linemap[y * wolfmap.width + (x - 1)].sector, cell->sector,
+                            LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                        );
+                    }
+                }
+
+                if (cell->sbottom) {
+                    neighbor = x <= 0 ? NULL : &doommap.linemap[y * wolfmap.width + (x - 1)];
+
+                    if (neighbor != NULL && neighbor->sbottom && neighbor->sector == cell->sector &&
+                        (y >= (wolfmap.height - 1) || doommap.linemap[(y + 1) * wolfmap.width + x].tile ==
+                                                          doommap.linemap[(y + 1) * wolfmap.width + (x - 1)].tile)) {
+                        cell->bottom = neighbor->bottom;
+                        doommap.lines[cell->bottom].end = add_vertex((x + 1) * 64, (y + 1) * -64);
+                    } else {
+                        cell->bottom = add_line(
+                            add_vertex((x + 0) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 1) * -64), "-", "-",
+                            "-", "-", "-", "-",
+                            (y + 1) >= wolfmap.height ? NO_SECTOR : doommap.linemap[(y + 1) * wolfmap.width + x].sector,
+                            cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                        );
+                    }
+                }
+
                 if (cell->fright) {
                     neighbor = y <= 0 ? NULL : &doommap.linemap[(y - 1) * wolfmap.width + x];
 
@@ -556,15 +584,25 @@ void map_to_wad(const char* output_name) {
                         neighbor = &doommap.linemap[y * wolfmap.width + (x + 1)];
                         cell->right = add_line(
                             add_vertex((x + 1) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 0) * -64),
-                            cell->wall->textures[SIDE_Y], neighbor->sector, cell->sector,
-                            cell->sector == NO_SECTOR ? (LF_BLOCKING | LF_UNPEG_LOW) : (LF_TWO_SIDED | LF_SECRET),
+                            (cell->secret && cell->wall->type != WALL_MIDTEX) ? cell->wall->textures[SIDE_Y] : "-",
+                            (!cell->secret || cell->wall->type == WALL_MIDTEX) ? cell->wall->textures[SIDE_Y] : "-",
+                            "-",
+                            (cell->secret && cell->wall->type != WALL_MIDTEX) ? cell->wall->textures[SIDE_BACK_Y] : "-",
+                            (!cell->secret || cell->wall->type == WALL_MIDTEX) ? cell->wall->textures[SIDE_BACK_Y]
+                                                                               : "-",
+                            "-", neighbor->sector, cell->sector,
+                            cell->wall->type == WALL_MIDTEX
+                                ? (cell->secret ? (LF_TWO_SIDED | LF_UNPEG_LOW)
+                                                : (LF_TWO_SIDED | LF_UNPEG_LOW | LF_BLOCKING | LF_BLOCK_SOUND))
+                                : (cell->sector == NO_SECTOR ? (LF_BLOCKING | LF_UNPEG_LOW)
+                                                             : (LF_TWO_SIDED | LF_SECRET)),
                             cell->sector == NO_SECTOR
                                 ? (cell->wall->actions[SIDE_Y] == WACT_EXIT
                                        ? ((neighbor->area != NULL && neighbor->area->type == AREA_SECRET_EXIT)
                                               ? LT_SECRET_EXIT
                                               : LT_EXIT)
                                        : LT_NORMAL)
-                                : LT_SECRET,
+                                : ((cell->secret && cell->wall->type != WALL_MIDTEX) ? LT_SECRET : LT_NORMAL),
                             cell->wall->tag, 0, 0
                         );
                     }
@@ -583,16 +621,25 @@ void map_to_wad(const char* output_name) {
                         neighbor = &doommap.linemap[(y - 1) * wolfmap.width + x];
                         cell->top = add_line(
                             add_vertex((x + 1) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 0) * -64),
-                            cell->wall->textures[SIDE_X], doommap.linemap[(y - 1) * wolfmap.width + x].sector,
-                            cell->sector,
-                            cell->sector == NO_SECTOR ? (LF_BLOCKING | LF_UNPEG_LOW) : (LF_TWO_SIDED | LF_SECRET),
+                            (cell->secret && cell->wall->type != WALL_MIDTEX) ? cell->wall->textures[SIDE_X] : "-",
+                            (!cell->secret || cell->wall->type == WALL_MIDTEX) ? cell->wall->textures[SIDE_X] : "-",
+                            "-",
+                            (cell->secret && cell->wall->type != WALL_MIDTEX) ? cell->wall->textures[SIDE_BACK_X] : "-",
+                            (!cell->secret || cell->wall->type == WALL_MIDTEX) ? cell->wall->textures[SIDE_BACK_X]
+                                                                               : "-",
+                            "-", neighbor->sector, cell->sector,
+                            cell->wall->type == WALL_MIDTEX
+                                ? (cell->secret ? (LF_TWO_SIDED | LF_UNPEG_LOW)
+                                                : (LF_TWO_SIDED | LF_UNPEG_LOW | LF_BLOCKING | LF_BLOCK_SOUND))
+                                : (cell->sector == NO_SECTOR ? (LF_BLOCKING | LF_UNPEG_LOW)
+                                                             : (LF_TWO_SIDED | LF_SECRET)),
                             cell->sector == NO_SECTOR
                                 ? (cell->wall->actions[SIDE_X] == WACT_EXIT
                                        ? ((neighbor->area != NULL && neighbor->area->type == AREA_SECRET_EXIT)
                                               ? LT_SECRET_EXIT
                                               : LT_EXIT)
                                        : LT_NORMAL)
-                                : LT_SECRET,
+                                : ((cell->secret && cell->wall->type != WALL_MIDTEX) ? LT_SECRET : LT_NORMAL),
                             cell->wall->tag, 0, 0
                         );
                     }
@@ -611,16 +658,25 @@ void map_to_wad(const char* output_name) {
                         neighbor = &doommap.linemap[y * wolfmap.width + (x - 1)];
                         cell->left = add_line(
                             add_vertex((x + 0) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 1) * -64),
-                            cell->wall->textures[SIDE_Y], doommap.linemap[y * wolfmap.width + (x - 1)].sector,
-                            cell->sector,
-                            cell->sector == NO_SECTOR ? (LF_BLOCKING | LF_UNPEG_LOW) : (LF_TWO_SIDED | LF_SECRET),
+                            (cell->secret && cell->wall->type != WALL_MIDTEX) ? cell->wall->textures[SIDE_Y] : "-",
+                            (!cell->secret || cell->wall->type == WALL_MIDTEX) ? cell->wall->textures[SIDE_Y] : "-",
+                            "-",
+                            (cell->secret && cell->wall->type != WALL_MIDTEX) ? cell->wall->textures[SIDE_BACK_Y] : "-",
+                            (!cell->secret || cell->wall->type == WALL_MIDTEX) ? cell->wall->textures[SIDE_BACK_Y]
+                                                                               : "-",
+                            "-", neighbor->sector, cell->sector,
+                            cell->wall->type == WALL_MIDTEX
+                                ? (cell->secret ? (LF_TWO_SIDED | LF_UNPEG_LOW)
+                                                : (LF_TWO_SIDED | LF_UNPEG_LOW | LF_BLOCKING | LF_BLOCK_SOUND))
+                                : (cell->sector == NO_SECTOR ? (LF_BLOCKING | LF_UNPEG_LOW)
+                                                             : (LF_TWO_SIDED | LF_SECRET)),
                             cell->sector == NO_SECTOR
                                 ? (cell->wall->actions[SIDE_Y] == WACT_EXIT
                                        ? ((neighbor->area != NULL && neighbor->area->type == AREA_SECRET_EXIT)
                                               ? LT_SECRET_EXIT
                                               : LT_EXIT)
                                        : LT_NORMAL)
-                                : LT_SECRET,
+                                : ((cell->secret && cell->wall->type != WALL_MIDTEX) ? LT_SECRET : LT_NORMAL),
                             cell->wall->tag, 0, 0
                         );
                     }
@@ -639,16 +695,25 @@ void map_to_wad(const char* output_name) {
                         neighbor = &doommap.linemap[(y + 1) * wolfmap.width + x];
                         cell->bottom = add_line(
                             add_vertex((x + 0) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 1) * -64),
-                            cell->wall->textures[SIDE_X], doommap.linemap[(y + 1) * wolfmap.width + x].sector,
-                            cell->sector,
-                            cell->sector == NO_SECTOR ? (LF_BLOCKING | LF_UNPEG_LOW) : (LF_TWO_SIDED | LF_SECRET),
+                            (cell->secret && cell->wall->type != WALL_MIDTEX) ? cell->wall->textures[SIDE_X] : "-",
+                            (!cell->secret || cell->wall->type == WALL_MIDTEX) ? cell->wall->textures[SIDE_X] : "-",
+                            "-",
+                            (cell->secret && cell->wall->type != WALL_MIDTEX) ? cell->wall->textures[SIDE_BACK_X] : "-",
+                            (!cell->secret || cell->wall->type == WALL_MIDTEX) ? cell->wall->textures[SIDE_BACK_X]
+                                                                               : "-",
+                            "-", neighbor->sector, cell->sector,
+                            cell->wall->type == WALL_MIDTEX
+                                ? (cell->secret ? (LF_TWO_SIDED | LF_UNPEG_LOW)
+                                                : (LF_TWO_SIDED | LF_UNPEG_LOW | LF_BLOCKING | LF_BLOCK_SOUND))
+                                : (cell->sector == NO_SECTOR ? (LF_BLOCKING | LF_UNPEG_LOW)
+                                                             : (LF_TWO_SIDED | LF_SECRET)),
                             cell->sector == NO_SECTOR
                                 ? (cell->wall->actions[SIDE_X] == WACT_EXIT
                                        ? ((neighbor->area != NULL && neighbor->area->type == AREA_SECRET_EXIT)
                                               ? LT_SECRET_EXIT
                                               : LT_EXIT)
                                        : LT_NORMAL)
-                                : LT_SECRET,
+                                : ((cell->secret && cell->wall->type != WALL_MIDTEX) ? LT_SECRET : LT_NORMAL),
                             cell->wall->tag, 0, 0
                         );
                     }
@@ -747,31 +812,34 @@ void map_to_wad(const char* output_name) {
     printf("map_to_wad: Saved as \"%s\" in \"%s\"\n", map_name, output_name);
 }
 
-bool place_free(int x, int y) {
+bool place_free(struct LineCell* from, int x, int y) {
     if (x < 0 || x >= wolfmap.width || y < 0 || y >= wolfmap.height)
         return false;
 
-    if (wolfmap.planes[PLANE_WALLS] != NULL) {
-        size_t pos = y * wolfmap.width + x;
-        if ((get_wall_info(wolfmap.planes[PLANE_WALLS][pos]) != NULL &&
-             (wolfmap.planes[PLANE_OBJECTS] == NULL || !oid_is_pushwall(wolfmap.planes[PLANE_OBJECTS][pos]))) ||
-            get_door_info(wolfmap.planes[PLANE_WALLS][pos]) != NULL)
-            return false;
-    }
+    size_t pos = y * wolfmap.width + x;
+    struct LineCell* cell = &doommap.linemap[pos];
+
+    if (cell->door != NULL ||
+        (cell->wall != NULL &&
+         (cell->wall->type != WALL_MIDTEX || (from->wall != NULL && from->wall->type == WALL_MIDTEX)) &&
+         (wolfmap.planes[PLANE_OBJECTS] == NULL || !oid_is_pushwall(wolfmap.planes[PLANE_OBJECTS][pos]))))
+        return false;
 
     return true;
 }
 
-bool floor_free(uint16_t sector, int x, int y) {
+bool floor_free(struct LineCell* from, int x, int y) {
     if (x < 0 || x >= wolfmap.width || y < 0 || y >= wolfmap.height)
         return true;
 
-    if (doommap.linemap != NULL) {
-        size_t pos = y * wolfmap.width + x;
-        return doommap.linemap[pos].sector != sector && doommap.linemap[pos].sector != NO_SECTOR &&
-               (wolfmap.planes[PLANE_WALLS] == NULL || (get_wall_info(wolfmap.planes[PLANE_WALLS][pos]) == NULL &&
-                                                        get_door_info(wolfmap.planes[PLANE_WALLS][pos]) == NULL));
-    }
+    struct LineCell* cell = &doommap.linemap[y * wolfmap.width + x];
+    if (cell->sector != from->sector && cell->sector != NO_SECTOR)
+        if (from->wall != NULL && from->wall->type == WALL_MIDTEX) {
+            if (cell->wall != NULL && cell->wall->type == WALL_MIDTEX)
+                return true;
+        } else if (cell->wall == NULL && cell->door == NULL) {
+            return true;
+        }
 
     return false;
 }
@@ -846,7 +914,8 @@ uint16_t add_side(
 }
 
 uint16_t add_line(
-    uint16_t start, uint16_t end, const char* texture, uint16_t sector, uint16_t back_sector, uint16_t flags,
+    uint16_t start, uint16_t end, const char* upper, const char* middle, const char* lower, const char* back_upper,
+    const char* back_middle, const char* back_lower, uint16_t sector, uint16_t back_sector, uint16_t flags,
     uint16_t special, uint16_t tag, int16_t x_offset, int16_t y_offset
 ) {
     if (doommap.lines == NULL) {
@@ -862,10 +931,8 @@ uint16_t add_line(
         doommap.lines[0].flags = flags;
         doommap.lines[0].special = special;
         doommap.lines[0].tag = tag;
-        doommap.lines[0].front = back_sector == NO_SECTOR ? add_side("-", texture, "-", sector, x_offset, y_offset)
-                                                          : add_side(texture, "-", texture, sector, x_offset, y_offset);
-        doommap.lines[0].back =
-            back_sector == NO_SECTOR ? NO_SIDEDEF : add_side("-", "-", "-", back_sector, x_offset, y_offset);
+        doommap.lines[0].front = add_side(upper, middle, lower, sector, x_offset, y_offset);
+        doommap.lines[0].back = add_side(back_upper, back_middle, back_lower, back_sector, x_offset, y_offset);
         return 0;
     }
 
@@ -886,10 +953,8 @@ uint16_t add_line(
     doommap.lines[i].flags = flags;
     doommap.lines[i].special = special;
     doommap.lines[i].tag = tag;
-    doommap.lines[i].front = back_sector == NO_SECTOR ? add_side("-", texture, "-", sector, x_offset, y_offset)
-                                                      : add_side(texture, "-", texture, sector, x_offset, y_offset);
-    doommap.lines[i].back =
-        back_sector == NO_SECTOR ? NO_SIDEDEF : add_side("-", "-", "-", back_sector, x_offset, y_offset);
+    doommap.lines[i].front = add_side(upper, middle, lower, sector, x_offset, y_offset);
+    doommap.lines[i].back = add_side(back_upper, back_middle, back_lower, back_sector, x_offset, y_offset);
     return i;
 }
 

@@ -12,6 +12,8 @@
 
 #define SIDE_X 0
 #define SIDE_Y 1
+#define SIDE_BACK_X 2
+#define SIDE_BACK_Y 3
 #define SIDE_LEFT 0
 #define SIDE_RIGHT 1
 
@@ -36,6 +38,11 @@ struct Config {
     size_t num_walls, num_doors, num_objects, num_areas;
 };
 
+enum WallTypes {
+    WALL_NORMAL,
+    WALL_MIDTEX,
+};
+
 enum WallActions {
     WACT_NONE,
     WACT_SWITCH,
@@ -46,7 +53,9 @@ struct WallInfo {
     int id;
     char name[NAME_MAX];
 
-    char textures[2][LUMP_NAME_MAX];
+    enum WallTypes type;
+
+    char textures[4][LUMP_NAME_MAX];
 
     enum WallActions actions[2];
     uint16_t tag;
@@ -59,6 +68,12 @@ enum DoorTypes {
     DOOR_RED,
     DOOR_YELLOW,
     DOOR_BLUE,
+    DOOR_RED_CARD,
+    DOOR_YELLOW_CARD,
+    DOOR_BLUE_CARD,
+    DOOR_RED_SKULL,
+    DOOR_YELLOW_SKULL,
+    DOOR_BLUE_SKULL,
 };
 
 enum DoorAxes {
@@ -132,6 +147,7 @@ void parse_uint16(uint16_t*, yyjson_val*, uint16_t);
 void parse_map_format(enum MapFormats*, yyjson_val*);
 
 void parse_walls(struct WallInfo**, size_t*, yyjson_val*);
+void parse_wall_type(enum WallTypes*, yyjson_val*);
 void parse_wall_action(enum WallActions*, yyjson_val*);
 
 void parse_doors(struct DoorInfo**, size_t*, yyjson_val*);

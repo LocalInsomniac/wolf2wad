@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
             maphead_name = argv[++i];
             gamemaps_name = argv[++i];
         } else if (strcmp(argv[i], "-l") == 0) {
-            level = atoi(argv[++i]);
+            level = strtoul(argv[++i], NULL, 0);
         } else if (strcmp(argv[i], "-o") == 0) {
             output_name = argv[++i];
         }

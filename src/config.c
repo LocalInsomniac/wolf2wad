@@ -25,8 +25,8 @@ void config_init(const char* config_name) {
     printf("config_init: Using config \"%s\" (format: %u)\n", config.name, config.format);
 
     // Defaults
-    parse_name(config.flats[FLAT_FLOOR], LUMP_NAME_MAX, yyjson_obj_get(root, "floor"), "FLAT5_4");
-    parse_name(config.flats[FLAT_CEILING], LUMP_NAME_MAX, yyjson_obj_get(root, "ceiling"), "CEIL5_1");
+    parse_name(config.flats[FLAT_FLOOR], LUMP_NAME_MAX, yyjson_obj_get(root, "floor"), "-");
+    parse_name(config.flats[FLAT_CEILING], LUMP_NAME_MAX, yyjson_obj_get(root, "ceiling"), "-");
     parse_uint8(&config.brightness, yyjson_obj_get(root, "brightness"), 160);
     /*printf(
         "config_init: Set defaults (tex: %s/%s, light: %u)\n", config.flats[FLAT_FLOOR], config.flats[FLAT_CEILING],
@@ -101,7 +101,7 @@ void parse_walls(struct WallInfo** walls, size_t* num_walls, yyjson_val* value) 
     yyjson_val *key, *val;
     yyjson_obj_foreach(value, i, n, key, val) {
         struct WallInfo* wall = &(*walls)[i];
-        if ((wall->id = atoi(yyjson_get_str(key))) == 0) {
+        if ((wall->id = strtoul(yyjson_get_str(key), NULL, 0)) == 0) {
             printf("!!! parse_walls: Expected wall ID as non-zero integer\n");
             exit(EXIT_FAILURE);
         }
@@ -112,8 +112,11 @@ void parse_walls(struct WallInfo** walls, size_t* num_walls, yyjson_val* value) 
         }
 
         parse_name(wall->name, NAME_MAX, yyjson_obj_get(val, "name"), "Untitled");
-        parse_name(wall->textures[SIDE_X], LUMP_NAME_MAX, yyjson_obj_get(val, "xtex"), "");
+        parse_wall_type(&wall->type, yyjson_obj_get(val, "type"));
+        parse_name(wall->textures[SIDE_X], LUMP_NAME_MAX, yyjson_obj_get(val, "xtex"), "-");
         parse_name(wall->textures[SIDE_Y], LUMP_NAME_MAX, yyjson_obj_get(val, "ytex"), wall->textures[SIDE_X]);
+        parse_name(wall->textures[SIDE_BACK_X], LUMP_NAME_MAX, yyjson_obj_get(val, "xback"), wall->textures[SIDE_X]);
+        parse_name(wall->textures[SIDE_BACK_Y], LUMP_NAME_MAX, yyjson_obj_get(val, "yback"), wall->textures[SIDE_Y]);
         parse_wall_action(&wall->actions[SIDE_X], yyjson_obj_get(val, "xact"));
         parse_wall_action(&wall->actions[SIDE_Y], yyjson_obj_get(val, "yact"));
         parse_uint16(&wall->tag, yyjson_obj_get(val, "tag"), 0);
@@ -125,6 +128,19 @@ void parse_walls(struct WallInfo** walls, size_t* num_walls, yyjson_val* value) 
     }
 
     // printf("parse_walls: Found %zu wall(s)\n", *num_walls);
+}
+
+void parse_wall_type(enum WallTypes* ptr, yyjson_val* value) {
+    if (value == NULL || !yyjson_is_str(value)) {
+        *ptr = WALL_NORMAL;
+        return;
+    }
+
+    const char* action = yyjson_get_str(value);
+    if (strcmp(action, "midtex") == 0)
+        *ptr = WALL_MIDTEX;
+    else
+        *ptr = WALL_NORMAL;
 }
 
 void parse_wall_action(enum WallActions* ptr, yyjson_val* value) {
@@ -160,7 +176,7 @@ void parse_doors(struct DoorInfo** doors, size_t* num_doors, yyjson_val* value) 
     yyjson_val *key, *val;
     yyjson_obj_foreach(value, i, n, key, val) {
         struct DoorInfo* door = &(*doors)[i];
-        if ((door->id = atoi(yyjson_get_str(key))) == 0) {
+        if ((door->id = strtoul(yyjson_get_str(key), NULL, 0)) == 0) {
             printf("!!! parse_doors: Expected door ID as non-zero integer\n");
             exit(EXIT_FAILURE);
         }
@@ -177,9 +193,9 @@ void parse_doors(struct DoorInfo** doors, size_t* num_doors, yyjson_val* value) 
         parse_name(
             door->flats[FLAT_CEILING], LUMP_NAME_MAX, yyjson_obj_get(val, "ceiling"), config.flats[FLAT_CEILING]
         );
-        parse_name(door->sides[SIDE_LEFT], LUMP_NAME_MAX, yyjson_obj_get(val, "ltex"), "");
+        parse_name(door->sides[SIDE_LEFT], LUMP_NAME_MAX, yyjson_obj_get(val, "ltex"), "-");
         parse_name(door->sides[SIDE_RIGHT], LUMP_NAME_MAX, yyjson_obj_get(val, "rtex"), door->sides[SIDE_LEFT]);
-        parse_name(door->track, LUMP_NAME_MAX, yyjson_obj_get(val, "track"), "");
+        parse_name(door->track, LUMP_NAME_MAX, yyjson_obj_get(val, "track"), "-");
         parse_uint16(&door->tag, yyjson_obj_get(val, "tag"), 0);
 
         /*printf(
@@ -209,7 +225,49 @@ void parse_door_type(enum DoorTypes* ptr, yyjson_val* value) {
         *ptr = DOOR_YELLOW;
     else if (strcmp(type, "blue") == 0)
         *ptr = DOOR_BLUE;
-    else
+    else if (strcmp(type, "red_card") == 0) {
+        if (config.format == MAPF_DOOM) {
+            printf("! parse_door_type: Reverting \"red_card\" to \"red\" for vanilla format\n");
+            *ptr = DOOR_RED;
+        } else {
+            *ptr = DOOR_RED_CARD;
+        }
+    } else if (strcmp(type, "yellow_card") == 0) {
+        if (config.format == MAPF_DOOM) {
+            printf("! parse_door_type: Reverting \"yellow_card\" to \"yellow\" for vanilla format\n");
+            *ptr = DOOR_YELLOW;
+        } else {
+            *ptr = DOOR_YELLOW_CARD;
+        }
+    } else if (strcmp(type, "blue_card") == 0) {
+        if (config.format == MAPF_DOOM) {
+            printf("! parse_door_type: Reverting \"blue_card\" to \"blue\" for vanilla format\n");
+            *ptr = DOOR_BLUE;
+        } else {
+            *ptr = DOOR_BLUE_CARD;
+        }
+    } else if (strcmp(type, "red_skull") == 0) {
+        if (config.format == MAPF_DOOM) {
+            printf("! parse_door_type: Reverting \"red_skull\" to \"red\" for vanilla format\n");
+            *ptr = DOOR_RED;
+        } else {
+            *ptr = DOOR_RED_SKULL;
+        }
+    } else if (strcmp(type, "yellow_skull") == 0) {
+        if (config.format == MAPF_DOOM) {
+            printf("! parse_door_type: Reverting \"yellow_skull\" to \"yellow\" for vanilla format\n");
+            *ptr = DOOR_YELLOW;
+        } else {
+            *ptr = DOOR_YELLOW_SKULL;
+        }
+    } else if (strcmp(type, "blue_skull") == 0) {
+        if (config.format == MAPF_DOOM) {
+            printf("! parse_door_type: Reverting \"blue_skull\" to \"blue\" for vanilla format\n");
+            *ptr = DOOR_BLUE;
+        } else {
+            *ptr = DOOR_BLUE_SKULL;
+        }
+    } else
         *ptr = DOOR_NORMAL;
 }
 
@@ -235,7 +293,7 @@ void parse_objects(struct ObjectInfo** objects, size_t* num_objects, yyjson_val*
     yyjson_val *key, *val;
     yyjson_obj_foreach(value, i, n, key, val) {
         struct ObjectInfo* object = &(*objects)[i];
-        if ((object->id = atoi(yyjson_get_str(key))) == 0) {
+        if ((object->id = strtoul(yyjson_get_str(key), NULL, 0)) == 0) {
             printf("!!! parse_objects: Expected object ID as non-zero integer\n");
             exit(EXIT_FAILURE);
         }
@@ -309,8 +367,12 @@ void parse_object_flags(enum ThingFlags* ptr, yyjson_val* value) {
         *ptr |= TF_NO_DEATHMATCH;
     if ((flag = yyjson_obj_get(value, "no_coop")) != NULL && yyjson_is_bool(flag) && yyjson_get_bool(flag))
         *ptr |= TF_NO_COOP;
-    if ((flag = yyjson_obj_get(value, "friendly")) != NULL && yyjson_is_bool(flag) && yyjson_get_bool(flag))
-        *ptr |= TF_FRIENDLY;
+    if ((flag = yyjson_obj_get(value, "friendly")) != NULL && yyjson_is_bool(flag) && yyjson_get_bool(flag)) {
+        if (config.format < MAPF_MBF)
+            printf("! parse_object_flags: \"friendly\" cannot be used in Boom and older\n");
+        else
+            *ptr |= TF_FRIENDLY;
+    }
 }
 
 void parse_areas(struct AreaInfo** areas, size_t* num_areas, yyjson_val* value) {
@@ -331,7 +393,7 @@ void parse_areas(struct AreaInfo** areas, size_t* num_areas, yyjson_val* value) 
     yyjson_val *key, *val;
     yyjson_obj_foreach(value, i, n, key, val) {
         struct AreaInfo* area = &(*areas)[i];
-        if ((area->id = atoi(yyjson_get_str(key))) == 0) {
+        if ((area->id = strtoul(yyjson_get_str(key), NULL, 0)) == 0) {
             printf("!!! parse_areas: Expected area ID as non-zero integer\n");
             exit(EXIT_FAILURE);
         }
