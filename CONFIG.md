@@ -40,13 +40,13 @@
 
 ## `objects`
 
-| Property                                                                          | Description                                                                                                                                                                                 |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`                                                                            | Display name.                                                                                                                                                                               |
-| `type`                                                                            | Object type. Default is `marker`.<br><br>**Values:**<br>- `thing` Placeable map object.<br>- `pushwall` Turns solid walls into secret doors. Midtex walls become passthrough.<br>- `marker` |
-| `ednum`                                                                           | Editor number for `thing` objects.                                                                                                                                                          |
-| `angle`                                                                           | Spawn angle for `thing` objects. Default is `0`.                                                                                                                                            |
-| `easy`, `normal`, `hard`, `ambush`, `multiplayer`, `no_coop`, `no_dm`, `friendly` | Editor flags for `thing` objects. Defaults are `true` for `easy`, `normal`, `hard` and `multiplayer`. (`friendly` is MBF+ only)                                                             |
+| Property                                                                                  | Description                                                                                                                                                                                 |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                    | Display name.                                                                                                                                                                               |
+| `type`                                                                                    | Object type. Default is `marker`.<br><br>**Values:**<br>- `thing` Placeable map object.<br>- `pushwall` Turns solid walls into secret doors. Midtex walls become passthrough.<br>- `marker` |
+| `ednum`                                                                                   | Editor number for `thing` objects.                                                                                                                                                          |
+| `angle`                                                                                   | Spawn angle for `thing` objects. Default is `0`.                                                                                                                                            |
+| `easy`, `normal`, `hard`, `ambush`, `multiplayer`, `no_coop`, `no_deathmatch`, `friendly` | Editor flags for `thing` objects. Defaults are `true` for `easy`, `normal`, `hard` and `multiplayer`. (`friendly` is MBF+ only)                                                             |
 
 ## `areas`
 
