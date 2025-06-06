@@ -1,0 +1,2527 @@
+{
+    "name": "Spear Resurrection (.SOD)",
+    "format": "mbf21",
+
+    "floor": "FLAT5_4",
+    "ceiling": "FSRES31",
+    "brightness": 160,
+
+    "walls": {
+        "1": {
+            "name": "Stone1",
+            "xtex": "PSRES1",
+            "ytex": "PSRES1"
+        },
+
+        "2": {
+            "name": "Stone2",
+            "xtex": "PSRES2",
+            "ytex": "PSRES2"
+        },
+
+        "3": {
+            "name": "Stone light mould",
+            "xtex": "PSRES3",
+            "ytex": "PSRES3"
+        },
+
+        "4": {
+            "name": "Stone heavy mould",
+            "xtex": "PSRES4",
+            "ytex": "PSRES4"
+        },
+
+        "5": {
+            "name": "Stone flag",
+            "xtex": "PSRES5",
+            "ytex": "PSRES5"
+        },
+
+        "6": {
+            "name": "Stone Hitler pic",
+            "xtex": "PSRES6",
+            "ytex": "PSRES6"
+        },
+
+        "7": {
+            "name": "Wooden Support",
+            "xtex": "PSRES7",
+            "ytex": "PSRES7"
+        },
+
+        "8": {
+            "name": "Flag Stone 1",
+            "xtex": "PSRES8",
+            "ytex": "PSRES8"
+        },
+
+        "9": {
+            "name": "Sandstone flag",
+            "xtex": "PSRES9",
+            "ytex": "PSRES9"
+        },
+
+        "10": {
+            "name": "Greywall Plain",
+            "xtex": "PSRES10",
+            "ytex": "PSRES10"
+        },
+
+        "11": {
+            "name": "Greywall Red Strip",
+            "xtex": "PSRES11",
+            "ytex": "PSRES11"
+        },
+
+        "12": {
+            "name": "Stone Iron Cross",
+            "xtex": "PSRES12",
+            "ytex": "PSRES12"
+        },
+
+        "13": {
+            "name": "Greywall Red Eagle",
+            "xtex": "PSRES13",
+            "ytex": "PSRES13"
+        },
+
+        "14": {
+            "name": "Brown Stone",
+            "xtex": "PSRES14",
+            "ytex": "PSRES14"
+        },
+
+        "15": {
+            "name": "Grey Brick Sws Flag",
+            "xtex": "PSRES15",
+            "ytex": "PSRES15"
+        },
+
+        "16": {
+            "name": "Brown Stone flag",
+            "xtex": "PSRES16",
+            "ytex": "PSRES16"
+        },
+
+        "17": {
+            "name": "White Brick",
+            "xtex": "PSRES17",
+            "ytex": "PSRES17"
+        },
+
+        "18": {
+            "name": "White Brick Eagle",
+            "xtex": "PSRES18",
+            "ytex": "PSRES18"
+        },
+
+        "19": {
+            "name": "White Brick Hitler",
+            "xtex": "PSRES19",
+            "ytex": "PSRES19"
+        },
+
+        "20": {
+            "name": "White Brick Flag",
+            "xtex": "PSRES20",
+            "ytex": "PSRES20"
+        },
+
+        "21": {
+            "name": "Tomb Hitl NS/Hero",
+            "xtex": "PSRES21",
+            "ytex": "PSRES22",
+            "yact": "exit"
+        },
+
+        "22": {
+            "name": "Elevator Inactive",
+            "xtex": "PSRES24",
+            "ytex": "PSRES23"
+        },
+
+        "23": {
+            "name": "Concrete",
+            "xtex": "PSRES25",
+            "ytex": "PSRES25"
+        },
+
+        "24": {
+            "name": "Brown Brick",
+            "xtex": "PSRES26",
+            "ytex": "PSRES26"
+        },
+
+        "25": {
+            "name": "Brown Brick arch1",
+            "xtex": "PSRES27",
+            "ytex": "PSRES27"
+        },
+
+        "26": {
+            "name": "Brown Brick banner",
+            "xtex": "PSRES28",
+            "ytex": "PSRES28"
+        },
+
+        "27": {
+            "name": "Brownred Brick",
+            "xtex": "PSRES29",
+            "ytex": "PSRES29"
+        },
+
+        "28": {
+            "name": "Brnred Brck swas",
+            "xtex": "PSRES30",
+            "ytex": "PSRES30"
+        },
+
+        "29": {
+            "name": "Afterlife Plain",
+            "xtex": "PSRES31",
+            "ytex": "PSRES31"
+        },
+
+        "30": {
+            "name": "Afterlife Cross",
+            "xtex": "PSRES32",
+            "ytex": "PSRES32"
+        },
+
+        "31": {
+            "name": "Afterlife Skull",
+            "xtex": "PSRES33",
+            "ytex": "PSRES33"
+        },
+
+        "32": {
+            "name": "Brnred Brck banner",
+            "xtex": "PSRES34",
+            "ytex": "PSRES34"
+        },
+
+        "33": {
+            "name": "Grey Brick",
+            "xtex": "PSRES35",
+            "ytex": "PSRES35"
+        },
+
+        "34": {
+            "name": "Grey Brick Sws Flag",
+            "xtex": "PSRES36",
+            "ytex": "PSRES36"
+        },
+
+        "35": {
+            "name": "Brown Brick arch2",
+            "xtex": "PSRES37",
+            "ytex": "PSRES37"
+        },
+
+        "36": {
+            "name": "Grey Brick Blue",
+            "xtex": "PSRES38",
+            "ytex": "PSRES38"
+        },
+
+        "37": {
+            "name": "Grey Brick Blue Sws",
+            "xtex": "PSRES39",
+            "ytex": "PSRES39"
+        },
+
+        "38": {
+            "name": "Large Brown Brick",
+            "xtex": "PSRES40",
+            "ytex": "PSRES40"
+        },
+
+        "39": {
+            "name": "Lge Brn Brk Flag",
+            "xtex": "PSRES41",
+            "ytex": "PSRES41"
+        },
+
+        "40": {
+            "name": "Brown Brick Flag",
+            "xtex": "PSRES42",
+            "ytex": "PSRES42"
+        },
+
+        "41": {
+            "name": "Grey Brick Eag Lft",
+            "xtex": "PSRES43",
+            "ytex": "PSRES44"
+        },
+
+        "42": {
+            "name": "Grey Brick Eag Rgt",
+            "xtex": "PSRES44",
+            "ytex": "PSRES43"
+        },
+
+        "43": {
+            "name": "Red Eagle Flag Left",
+            "xtex": "PSRES45",
+            "ytex": "PSRES46"
+        },
+
+        "44": {
+            "name": "Red Eagle Flag Rght",
+            "xtex": "PSRES46",
+            "ytex": "PSRES45"
+        },
+
+        "45": {
+            "name": "Shelves",
+            "xtex": "PSRES47",
+            "ytex": "PSRES48"
+        },
+
+        "46": {
+            "name": "Deutschland Erwacht",
+            "xtex": "PSRES49",
+            "ytex": "PSRES49"
+        },
+
+        "47": {
+            "name": "Iron Cross red",
+            "xtex": "PSRES50",
+            "ytex": "PSRES50"
+        },
+
+        "48": {
+            "name": "Swastika banner",
+            "xtex": "PSRES51",
+            "ytex": "PSRES51"
+        },
+
+        "49": {
+            "name": "Metal",
+            "xtex": "PSRES52",
+            "ytex": "PSRES52"
+        },
+
+        "50": {
+            "name": "Wood Wall Plain",
+            "xtex": "PSRES53",
+            "ytex": "PSRES53"
+        },
+
+        "51": {
+            "name": "Wood Wall Eagle",
+            "xtex": "PSRES54",
+            "ytex": "PSRES54"
+        },
+
+        "52": {
+            "name": "Wood Wall Hitler",
+            "xtex": "PSRES55",
+            "ytex": "PSRES55"
+        },
+
+        "53": {
+            "name": "Wood Wall/panels",
+            "xtex": "PSRES56",
+            "ytex": "PSRES56"
+        },
+
+        "54": {
+            "name": "Wood Wall/panels SS",
+            "xtex": "PSRES57",
+            "ytex": "PSRES57"
+        },
+
+        "55": {
+            "name": "Wood Wall JP Flag",
+            "xtex": "PSRES58",
+            "ytex": "PSRES58"
+        },
+
+        "56": {
+            "name": "JP Windows",
+            "xtex": "PSRES59",
+            "ytex": "PSRES59"
+        },
+
+        "57": {
+            "name": "JP Windows Pic",
+            "xtex": "PSRES60",
+            "ytex": "PSRES60"
+        },
+
+        "58": {
+            "name": "JP Windows Flag",
+            "xtex": "PSRES61",
+            "ytex": "PSRES61"
+        },
+
+        "59": {
+            "name": "Sandstone",
+            "xtex": "PSRES62",
+            "ytex": "PSRES62"
+        },
+
+        "60": {
+            "name": "Sign MtlNS/brbckEW",
+            "xtex": "PSRES63",
+            "ytex": "PSRES64"
+        },
+
+        "61": {
+            "name": "Rock",
+            "xtex": "PSRES65",
+            "ytex": "PSRES65"
+        },
+
+        "62": {
+            "name": "Tiles",
+            "xtex": "PSRES66",
+            "ytex": "PSRES66"
+        },
+
+        "63": {
+            "name": "Tomb Hit2/Elev EW",
+            "xtex": "PSRES67",
+            "ytex": "PSRES24"
+        },
+
+        "64": {
+            "name": "Rock Hi Left",
+            "xtex": "PSRES68",
+            "ytex": "PSRES69"
+        },
+
+        "65": {
+            "name": "Rock Hi Right",
+            "xtex": "PSRES69",
+            "ytex": "PSRES68"
+        },
+
+        "66": {
+            "name": "Rock LoHiNS/HiLoEW",
+            "type": "midtex",
+            "xtex": "PSRES70",
+            "ytex": "PSRES71",
+            "xback": "PSRES71",
+            "yback": "PSRES70"
+        },
+
+        "67": {
+            "name": "Rock HiLoNS/LoHiEW",
+            "type": "midtex",
+            "xtex": "PSRES71",
+            "ytex": "PSRES70",
+            "xback": "PSRES70",
+            "yback": "PSRES71"
+        },
+
+        "68": {
+            "name": "Shrubbery 1",
+            "type": "midtex",
+            "xtex": "PSRES72",
+            "ytex": "PSRES73"
+        },
+
+        "69": {
+            "name": "Danger (mines NS)",
+            "type": "midtex",
+            "xtex": "PSRES74",
+            "ytex": "PSRES73",
+            "xback": "PSRES72"
+        },
+
+        "70": {
+            "name": "Shrubbery 2",
+            "type": "midtex",
+            "xtex": "PSRES73",
+            "ytex": "PSRES72"
+        },
+
+        "71": {
+            "name": "Greywall Red Swas",
+            "xtex": "PSRES75",
+            "ytex": "PSRES75"
+        },
+
+        "72": {
+            "name": "Greywall Red Hitlr",
+            "xtex": "PSRES76",
+            "ytex": "PSRES76"
+        },
+
+        "73": {
+            "name": "Concrete 4 Skulls",
+            "xtex": "PSRES77",
+            "ytex": "PSRES77"
+        },
+
+        "74": {
+            "name": "Concrete Cell",
+            "xtex": "PSRES78",
+            "ytex": "PSRES78"
+        },
+
+        "75": {
+            "name": "Concrete Cell Skll",
+            "xtex": "PSRES79",
+            "ytex": "PSRES79"
+        },
+
+        "76": {
+            "name": "Conc Cell Win/Skl2",
+            "xtex": "PSRES80",
+            "ytex": "PSRES81"
+        },
+
+        "77": {
+            "name": "Concrete Window",
+            "xtex": "PSRES82",
+            "ytex": "PSRES82"
+        },
+
+        "78": {
+            "name": "Concrete 3 Skulls",
+            "xtex": "PSRES83",
+            "ytex": "PSRES83"
+        },
+
+        "79": {
+            "name": "Black Wall",
+            "xtex": "PSRES84",
+            "ytex": "PSRES84"
+        },
+
+        "80": {
+            "name": "Grey Brick Hitler",
+            "xtex": "PSRES85",
+            "ytex": "PSRES85"
+        },
+
+        "81": {
+            "name": "Lge Brn Brk Hitler",
+            "xtex": "PSRES86",
+            "ytex": "PSRES86"
+        },
+
+        "82": {
+            "name": "Shelf/Shelf End EW",
+            "xtex": "PSRES87",
+            "ytex": "PSRES88"
+        },
+
+        "83": {
+            "name": "Shelf/Shelf End NS",
+            "xtex": "PSRES88",
+            "ytex": "PSRES89"
+        },
+
+        "84": {
+            "name": "Wooden Crate",
+            "xtex": "PSRES90",
+            "ytex": "PSRES90"
+        },
+
+        "85": {
+            "name": "Wooden Crate Eagle",
+            "xtex": "PSRES91",
+            "ytex": "PSRES91"
+        },
+
+        "86": {
+            "name": "Flag Stone 2",
+            "xtex": "PSRES92",
+            "ytex": "PSRES92"
+        },
+
+        "87": {
+            "name": "Tomb Swas NS",
+            "xtex": "PSRES93",
+            "ytex": "PSRES94"
+        },
+
+        "88": {
+            "name": "Heroes Des Reich",
+            "xtex": "PSRES26",
+            "ytex": "PSRES95"
+        },
+
+        "89": {
+            "name": "Castle Ramparts",
+            "type": "midtex",
+            "xtex": "PSRES96",
+            "ytex": "PSRES96"
+        }
+    },
+
+    "doors": {
+        "90": {
+            "name": "Unlocked door",
+            "axis": "y",
+            "ltex": "PSRES109",
+            "rtex": "PSRES110",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111"
+        },
+
+        "91": {
+            "name": "Unlocked door",
+            "ltex": "PSRES109",
+            "rtex": "PSRES110",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111"
+        },
+
+        "92": {
+            "name": "Locked door-Gold",
+            "axis": "y",
+            "ltex": "PSRES107",
+            "rtex": "PSRES108",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111",
+            "type": "yellow_card"
+        },
+
+        "93": {
+            "name": "Locked door-Gold",
+            "ltex": "PSRES107",
+            "rtex": "PSRES108",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111",
+            "type": "yellow_card"
+        },
+
+        "94": {
+            "name": "Locked door-Bronze",
+            "axis": "y",
+            "ltex": "PSRES105",
+            "rtex": "PSRES106",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111",
+            "type": "blue_card"
+        },
+
+        "95": {
+            "name": "Locked door-Bronze",
+            "ltex": "PSRES105",
+            "rtex": "PSRES106",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111",
+            "type": "blue_card"
+        },
+
+        "96": {
+            "name": "Locked door-Blood",
+            "axis": "y",
+            "ltex": "PSRES114",
+            "rtex": "PSRES115",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111",
+            "type": "red_card"
+        },
+
+        "97": {
+            "name": "Locked door-Blood",
+            "ltex": "PSRES114",
+            "rtex": "PSRES115",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111",
+            "type": "red_card"
+        },
+
+        "98": {
+            "name": "Locked elevator-E/W",
+            "axis": "y",
+            "ltex": "PSRES99",
+            "rtex": "PSRES100",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111",
+            "type": "blue_skull"
+        },
+
+        "99": {
+            "name": "Locked elevator-N/S",
+            "ltex": "PSRES99",
+            "rtex": "PSRES100",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111",
+            "type": "blue_skull"
+        },
+
+        "100": {
+            "name": "Elevator door-E/W",
+            "axis": "y",
+            "ltex": "PSRES112",
+            "rtex": "PSRES113",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111"
+        },
+
+        "101": {
+            "name": "Elevator door-N/S",
+            "ltex": "PSRES112",
+            "rtex": "PSRES113",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES111"
+        },
+
+        "102": {
+            "name": "Rusted door-E/W",
+            "axis": "y",
+            "ltex": "PSRES97",
+            "rtex": "PSRES98",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES104"
+        },
+
+        "103": {
+            "name": "Rusted door-N/S",
+            "ltex": "PSRES97",
+            "rtex": "PSRES98",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES104"
+        },
+
+        "104": {
+            "name": "Wooden door-E/W",
+            "axis": "y",
+            "ltex": "PSRES101",
+            "rtex": "PSRES102",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES103"
+        },
+
+        "105": {
+            "name": "Wooden door-N/S",
+            "ltex": "PSRES101",
+            "rtex": "PSRES102",
+            "ceiling": "CEIL5_1",
+            "track": "PSRES103"
+        }
+    },
+
+    "objects": {
+        "98": {
+            "name": "Secret door",
+            "type": "pushwall"
+        },
+
+        "19": {
+            "name": "Start position/North",
+            "type": "thing",
+            "ednum": 1,
+            "angle": 90
+        },
+
+        "20": {
+            "name": "Start position/East",
+            "type": "thing",
+            "ednum": 1,
+            "angle": 0
+        },
+
+        "21": {
+            "name": "Start position/South",
+            "type": "thing",
+            "ednum": 1,
+            "angle": 270
+        },
+
+        "22": {
+            "name": "Start position/West",
+            "type": "thing",
+            "ednum": 1,
+            "angle": 180
+        },
+
+        "0x0017": {
+            "name": "Water puddle",
+            "type": "thing",
+            "ednum": 20031
+        },
+
+        "0x012f": {
+            "name": "Black Puddle",
+            "type": "thing",
+            "ednum": 20105
+        },
+
+        "0x012a": {
+            "name": "Green Slime",
+            "type": "thing",
+            "ednum": 20091
+        },
+
+        "0x0018": {
+            "name": "Red oil drum",
+            "type": "thing",
+            "ednum": 20032
+        },
+
+        "0x0104": {
+            "name": "Red exploding drum",
+            "type": "thing",
+            "ednum": 20033
+        },
+
+        "0x012d": {
+            "name": "Rusty old drum",
+            "type": "thing",
+            "ednum": 20103
+        },
+
+        "0x0024": {
+            "name": "Table",
+            "type": "thing",
+            "ednum": 20046
+        },
+
+        "0x002d": {
+            "name": "Table/skull & axe",
+            "type": "thing",
+            "ednum": 20053
+        },
+
+        "0x003c": {
+            "name": "Table/skull candle",
+            "type": "thing",
+            "ednum": 20057
+        },
+
+        "0x0019": {
+            "name": "Table/chairs",
+            "type": "thing",
+            "ednum": 20034
+        },
+
+        "0x003a": {
+            "name": "Table/coffee",
+            "type": "thing",
+            "ednum": 20055
+        },
+
+        "0x003b": {
+            "name": "Table/drinks",
+            "type": "thing",
+            "ednum": 20056
+        },
+
+        "0x0021": {
+            "name": "Desk with Books",
+            "type": "thing",
+            "ednum": 20043
+        },
+
+        "0x0122": {
+            "name": "Desk/typewriter",
+            "type": "thing",
+            "ednum": 20083
+        },
+
+        "0x001a": {
+            "name": "Floor lamp",
+            "type": "thing",
+            "ednum": 20035
+        },
+
+        "0x00e3": {
+            "name": "Indoor Torch",
+            "type": "thing",
+            "ednum": 20080
+        },
+
+        "0x001f": {
+            "name": "Blue vase/plant",
+            "type": "thing",
+            "ednum": 20041
+        },
+
+        "0x0022": {
+            "name": "Red vase/plant",
+            "type": "thing",
+            "ednum": 20044
+        },
+
+        "0x0057": {
+            "name": "Hanging plant",
+            "type": "thing",
+            "ednum": 20077
+        },
+
+        "0x003e": {
+            "name": "Nazi flag on pole",
+            "type": "thing",
+            "ednum": 20059
+        },
+
+        "0x0123": {
+            "name": "Swastika Banner",
+            "type": "thing",
+            "ednum": 20084
+        },
+
+        "0x0027": {
+            "name": "Suit of armor",
+            "type": "thing",
+            "ednum": 20049
+        },
+
+        "0x0120": {
+            "name": "Plain Pedestal",
+            "type": "thing",
+            "ednum": 20081
+        },
+
+        "0x0121": {
+            "name": "Plain Pedestal/Pot",
+            "type": "thing",
+            "ednum": 20082
+        },
+
+        "0x0058": {
+            "name": "Pedestal Hitler",
+            "type": "thing",
+            "ednum": 20078
+        },
+
+        "0x001e": {
+            "name": "White Column",
+            "type": "thing",
+            "ednum": 20038
+        },
+
+        "0x0107": {
+            "name": "Breakable Column",
+            "type": "thing",
+            "ednum": 20039
+        },
+
+        "0x004f": {
+            "name": "Broken Column",
+            "type": "thing",
+            "ednum": 20040
+        },
+
+        "0x0051": {
+            "name": "Stone Column",
+            "type": "thing",
+            "ednum": 20072
+        },
+
+        "0x012c": {
+            "name": "Well Empty",
+            "type": "thing",
+            "ednum": 20102
+        },
+
+        "0x0125": {
+            "name": "Well Full",
+            "type": "thing",
+            "ednum": 20086
+        },
+
+        "0x0023": {
+            "name": "Toilet",
+            "type": "thing",
+            "ednum": 20045
+        },
+
+        "0x0043": {
+            "name": "Bathroom Sink",
+            "type": "thing",
+            "ednum": 20107
+        },
+
+        "0x012e": {
+            "name": "Boxes on floor",
+            "type": "thing",
+            "ednum": 20104
+        },
+
+        "0x0025": {
+            "name": "Blue ceiling light",
+            "type": "thing",
+            "ednum": 20047
+        },
+
+        "0x00e2": {
+            "name": "Blue blinking light",
+            "type": "thing",
+            "ednum": 20076
+        },
+
+        "0x003f": {
+            "name": "Cyan ceiling light",
+            "type": "thing",
+            "ednum": 20060
+        },
+
+        "0x001b": {
+            "name": "Chandelier",
+            "type": "thing",
+            "ednum": 20036
+        },
+
+        "0x001d": {
+            "name": "Small First Aid",
+            "type": "thing",
+            "ednum": 20000
+        },
+
+        "0x002f": {
+            "name": "Dinner",
+            "type": "thing",
+            "ednum": 20001
+        },
+
+        "0x0030": {
+            "name": "First Aid",
+            "type": "thing",
+            "ednum": 20004
+        },
+
+        "0x0038": {
+            "name": "One Up/Extra Life",
+            "type": "thing",
+            "ednum": 20010
+        },
+
+        "0x011a": {
+            "name": "God Mode Artefact",
+            "type": "thing",
+            "ednum": 20011
+        },
+
+        "0x002e": {
+            "name": "Death Artefact",
+            "type": "thing",
+            "ednum": 20013
+        },
+
+        "0x0064": {
+            "name": "Teleport Artefact 1",
+            "type": "thing",
+            "ednum": 20012
+        },
+
+        "0x0065": {
+            "name": "Teleport to here 1",
+            "type": "thing",
+            "ednum": 14
+        },
+
+        "0x0066": {
+            "name": "Teleport Artefact 2",
+            "type": "thing",
+            "ednum": 20012
+        },
+
+        "0x0067": {
+            "name": "Teleport to here 2",
+            "type": "thing",
+            "ednum": 14,
+			"angle": 180
+        },
+
+        "0x012b": {
+            "name": "Fake Teleport",
+            "type": "thing",
+            "ednum": 20012
+        },
+
+        "0x0031": {
+            "name": "Ammo 1 clip",
+            "type": "thing",
+            "ednum": 20014
+        },
+
+        "0x0048": {
+            "name": "25 Ammo 1 crate",
+            "type": "thing",
+            "ednum": 20015
+        },
+
+        "0x0050": {
+            "name": "Ammo 2 clip",
+            "type": "thing",
+            "ednum": 20016
+        },
+
+        "0x0059": {
+            "name": "25 Ammo 2 crate",
+            "type": "thing",
+            "ednum": 20017
+        },
+
+        "0x0130": {
+            "name": "Pistol",
+            "type": "thing",
+            "ednum": 20019
+        },
+
+        "0x0032": {
+            "name": "Machine gun",
+            "type": "thing",
+            "ednum": 20020
+        },
+
+        "0x0033": {
+            "name": "Multi cannon Mk3",
+            "type": "thing",
+            "ednum": 20021
+        },
+
+        "0x004b": {
+            "name": "Multi cannon Mk4",
+            "type": "thing",
+            "ednum": 20022
+        },
+
+        "0x0034": {
+            "name": "Cross",
+            "type": "thing",
+            "ednum": 20005
+        },
+
+        "0x0035": {
+            "name": "Chalice",
+            "type": "thing",
+            "ednum": 20006
+        },
+
+        "0x0036": {
+            "name": "Chest",
+            "type": "thing",
+            "ednum": 20007
+        },
+
+        "0x0037": {
+            "name": "Crown",
+            "type": "thing",
+            "ednum": 20008
+        },
+
+        "0x0053": {
+            "name": "Black diamond",
+            "type": "thing",
+            "ednum": 20009
+        },
+
+        "0x002b": {
+            "name": "Gold key",
+            "type": "thing",
+            "ednum": 6
+        },
+
+        "0x002c": {
+            "name": "Bronze Key",
+            "type": "thing",
+            "ednum": 5
+        },
+
+        "0x004c": {
+            "name": "Blood Key",
+            "type": "thing",
+            "ednum": 13
+        },
+
+        "0x004d": {
+            "name": "Elevator Key",
+            "type": "thing",
+            "ednum": 40
+        },
+
+        "0x002a": {
+            "name": "Bones on floor 1",
+            "type": "thing",
+            "ednum": 20052
+        },
+
+        "0x0042": {
+            "name": "Bones on floor 2",
+            "type": "thing",
+            "ednum": 20106
+        },
+
+        "0x0128": {
+            "name": "White skull",
+            "type": "thing",
+            "ednum": 20089
+        },
+
+        "0x0129": {
+            "name": "Pink Skull",
+            "type": "thing",
+            "ednum": 20090
+        },
+
+        "0x003d": {
+            "name": "Blood <slurp>",
+            "type": "thing",
+            "ednum": 20058
+        },
+
+        "0x0039": {
+            "name": "Gore/blood <slurp>",
+            "type": "thing",
+            "ednum": 20054
+        },
+
+        "0x0020": {
+            "name": "Blood/ribs on floor",
+            "type": "thing",
+            "ednum": 20042
+        },
+
+        "0x0056": {
+            "name": "Blood/ribs on floor",
+            "type": "thing",
+            "ednum": 20108
+        },
+
+        "0x001c": {
+            "name": "Hanging torso",
+            "type": "thing",
+            "ednum": 20037
+        },
+
+        "0x0028": {
+            "name": "Hanging cage/empty",
+            "type": "thing",
+            "ednum": 20050
+        },
+
+        "0x0026": {
+            "name": "Hanging cage/gore",
+            "type": "thing",
+            "ednum": 20048
+        },
+
+        "0x0029": {
+            "name": "Hanging cage/skel",
+            "type": "thing",
+            "ednum": 20051
+        },
+
+        "0x0052": {
+            "name": "Chopping table/gore",
+            "type": "thing",
+            "ednum": 20073
+        },
+
+        "0x0046": {
+            "name": "Hanging Vines",
+            "type": "thing",
+            "ednum": 20065
+        },
+
+        "0x011b": {
+            "name": "Berry Bush +10%",
+            "type": "thing",
+            "ednum": 20002
+        },
+
+        "0x011c": {
+            "name": "Berry Bush -16%",
+            "type": "thing",
+            "ednum": 20003
+        },
+
+        "0x0040": {
+            "name": "Low shrub",
+            "type": "thing",
+            "ednum": 20061
+        },
+
+        "0x0041": {
+            "name": "Low shrub/flwrs",
+            "type": "thing",
+            "ednum": 20062
+        },
+
+        "0x0044": {
+            "name": "Tall shrub",
+            "type": "thing",
+            "ednum": 20063
+        },
+
+        "0x0047": {
+            "name": "Bushy tree",
+            "type": "thing",
+            "ednum": 20066
+        },
+
+        "0x0045": {
+            "name": "Tree",
+            "type": "thing",
+            "ednum": 20064
+        },
+
+        "0x0124": {
+            "name": "Dead Tree",
+            "type": "thing",
+            "ednum": 20085
+        },
+
+        "0x0054": {
+            "name": "Small rocks 1",
+            "type": "thing",
+            "ednum": 20074
+        },
+
+        "0x0055": {
+            "name": "Small rocks 2",
+            "type": "thing",
+            "ednum": 20075
+        },
+
+        "0x0126": {
+            "name": "Small rocks/skulls",
+            "type": "thing",
+            "ednum": 20087
+        },
+
+        "0x0049": {
+            "name": "Rock",
+            "type": "thing",
+            "ednum": 20067
+        },
+
+        "0x011d": {
+            "name": "O/D Ammo 1 clip",
+            "type": "thing",
+            "ednum": 20014
+        },
+
+        "0x011e": {
+            "name": "O/D Bones 1",
+            "type": "thing",
+            "ednum": 20088
+        },
+
+        "0x011f": {
+            "name": "O/D Bones 2",
+            "type": "thing",
+            "ednum": 20100
+        },
+
+        "0x0127": {
+            "name": "O/D Bones 3",
+            "type": "thing",
+            "ednum": 20101
+        },
+
+        "0x004e": {
+            "name": "Landmine",
+            "type": "thing",
+            "ednum": 20029
+        },
+
+        "0x0105": {
+            "name": "O/D Torch",
+            "type": "thing",
+            "ednum": 20079
+        },
+
+        "0x00e4": {
+            "name": "Dead Dog",
+            "type": "thing",
+            "ednum": 20109
+        },
+
+        "0x007c": {
+            "name": "Dead guard",
+            "type": "thing",
+            "ednum": 20030
+        },
+
+        "0x00e5": {
+            "name": "Dead SS",
+            "type": "thing",
+            "ednum": 20110
+        },
+
+        "0x00e6": {
+            "name": "Dead Mutant",
+            "type": "thing",
+            "ednum": 20111
+        },
+
+        "0x00e7": {
+            "name": "Dead Officer",
+            "type": "thing",
+            "ednum": 20112
+        },
+
+        "0x010e": {
+            "name": "Pedestal Hans",
+            "type": "thing",
+            "ednum": 20092
+        },
+
+        "0x010f": {
+            "name": "Pedestal Gretyl",
+            "type": "thing",
+            "ednum": 20093
+        },
+
+        "0x0110": {
+            "name": "Pedestal Schabbs",
+            "type": "thing",
+            "ednum": 20094
+        },
+
+        "0x0111": {
+            "name": "Pedestal Fatface",
+            "type": "thing",
+            "ednum": 20095
+        },
+
+        "0x0112": {
+            "name": "Pedestal Wilhelm",
+            "type": "thing",
+            "ednum": 20096
+        },
+
+        "0x0113": {
+            "name": "Pedestal Trans",
+            "type": "thing",
+            "ednum": 20097
+        },
+
+        "0x0114": {
+            "name": "Empty pedestal Hans",
+            "type": "thing",
+            "ednum": 20098
+        },
+
+        "0x0115": {
+            "name": "Empty pedestal Gretyl",
+            "type": "thing",
+            "ednum": 20099
+        },
+
+        "0x0116": {
+            "name": "Empty pedestal Schabbs",
+            "type": "thing",
+            "ednum": 20069
+        },
+
+        "0x0117": {
+            "name": "Empty pedestal Fatface",
+            "type": "thing",
+            "ednum": 20068
+        },
+
+        "0x0118": {
+            "name": "Empty pedestal Wilhelm",
+            "type": "thing",
+            "ednum": 20071
+        },
+
+        "0x0119": {
+            "name": "Empty pedestal Trans",
+            "type": "thing",
+            "ednum": 20070
+        },
+
+        "0x004a": {
+            "name": "Spear",
+            "type": "thing",
+            "ednum": 20023
+        },
+
+        "0x0086": {
+            "name": "Bomber 1/S/E",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x0087": {
+            "name": "Bomber 1/S/N",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x0088": {
+            "name": "Bomber 1/S/W",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x0089": {
+            "name": "Bomber 1/S/S",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x008a": {
+            "name": "Bomber 1/M/E",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x008b": {
+            "name": "Bomber 1/M/N",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x008c": {
+            "name": "Bomber 1/M/W",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x008d": {
+            "name": "Bomber 1/M/S",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x00ae": {
+            "name": "Bomber 3/M/E",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00af": {
+            "name": "Bomber 3/M/N",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00b0": {
+            "name": "Bomber 3/M/W",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00b1": {
+            "name": "Bomber 3/M/S",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00d2": {
+            "name": "Bomber 4/M/E",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00d3": {
+            "name": "Bomber 4/M/N",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00d4": {
+            "name": "Bomber 4/M/W",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00d5": {
+            "name": "Bomber 4/M/S",
+            "type": "thing",
+            "ednum": 20025,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x006c": {
+            "name": "Guard 1/S/E",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x006d": {
+            "name": "Guard 1/S/N",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x006e": {
+            "name": "Guard 1/S/W",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x006f": {
+            "name": "Guard 1/S/S",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x0070": {
+            "name": "Guard 1/M/E",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x0071": {
+            "name": "Guard 1/M/N",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x0072": {
+            "name": "Guard 1/M/W",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x0073": {
+            "name": "Guard 1/M/S",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x0090": {
+            "name": "Guard 3/S/E",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x0091": {
+            "name": "Guard 3/S/N",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x0092": {
+            "name": "Guard 3/S/W",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x0093": {
+            "name": "Guard 3/S/S",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x0094": {
+            "name": "Guard 3/M/E",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x0095": {
+            "name": "Guard 3/M/N",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x0096": {
+            "name": "Guard 3/M/W",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x0097": {
+            "name": "Guard 3/M/S",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00b4": {
+            "name": "Guard 4/S/E",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00b5": {
+            "name": "Guard 4/S/N",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00b6": {
+            "name": "Guard 4/S/W",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00b7": {
+            "name": "Guard 4/S/S",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00b8": {
+            "name": "Guard 4/M/E",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00b9": {
+            "name": "Guard 4/M/N",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00ba": {
+            "name": "Guard 4/M/W",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00bb": {
+            "name": "Guard 4/M/S",
+            "type": "thing",
+            "ednum": 20024,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x007e": {
+            "name": "SS 1/S/E",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x007f": {
+            "name": "SS 1/S/N",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x0080": {
+            "name": "SS 1/S/W",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x0081": {
+            "name": "SS 1/S/S",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x0082": {
+            "name": "SS 1/M/E",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x0083": {
+            "name": "SS 1/M/N",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x0084": {
+            "name": "SS 1/M/W",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x0085": {
+            "name": "SS 1/M/S",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x00a2": {
+            "name": "SS 3/S/E",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00a3": {
+            "name": "SS 3/S/N",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00a4": {
+            "name": "SS 3/S/W",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00a5": {
+            "name": "SS 3/S/S",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00a6": {
+            "name": "SS 3/M/E",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00a7": {
+            "name": "SS 3/M/N",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00a8": {
+            "name": "SS 3/M/W",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00a9": {
+            "name": "SS 3/M/S",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00c6": {
+            "name": "SS 4/S/E",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00c7": {
+            "name": "SS 4/S/N",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00c8": {
+            "name": "SS 4/S/W",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00c9": {
+            "name": "SS 4/S/S",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00ca": {
+            "name": "SS 4/M/E",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00cb": {
+            "name": "SS 4/M/N",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00cc": {
+            "name": "SS 4/M/W",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00cd": {
+            "name": "SS 4/M/S",
+            "type": "thing",
+            "ednum": 20026,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x0074": {
+            "name": "Officer 1/S/E",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x0075": {
+            "name": "Officer 1/S/N",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x0076": {
+            "name": "Officer 1/S/W",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x0077": {
+            "name": "Officer 1/S/S",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x0078": {
+            "name": "Officer 1/M/E",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x0079": {
+            "name": "Officer 1/M/N",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x007a": {
+            "name": "Officer 1/M/W",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x007b": {
+            "name": "Officer 1/M/S",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x0098": {
+            "name": "Officer 3/S/E",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x0099": {
+            "name": "Officer 3/S/N",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x009a": {
+            "name": "Officer 3/S/W",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x009b": {
+            "name": "Officer 3/S/S",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x009c": {
+            "name": "Officer 3/M/E",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x009d": {
+            "name": "Officer 3/M/N",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x009e": {
+            "name": "Officer 3/M/W",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x009f": {
+            "name": "Officer 3/M/S",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00bc": {
+            "name": "Officer 4/S/E",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00bd": {
+            "name": "Officer 4/S/N",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00be": {
+            "name": "Officer 4/S/W",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00bf": {
+            "name": "Officer 4/S/S",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00c0": {
+            "name": "Officer 4/M/E",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00c1": {
+            "name": "Officer 4/M/N",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00c2": {
+            "name": "Officer 4/M/W",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00c3": {
+            "name": "Officer 4/M/S",
+            "type": "thing",
+            "ednum": 20028,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00d8": {
+            "name": "Mutant 1/S/E",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x00d9": {
+            "name": "Mutant 1/S/N",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x00da": {
+            "name": "Mutant 1/S/W",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x00db": {
+            "name": "Mutant 1/S/S",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x00dc": {
+            "name": "Mutant 1/M/E",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 0,
+            "no_deathmatch": true
+        },
+
+        "0x00dd": {
+            "name": "Mutant 1/M/N",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 90,
+            "no_deathmatch": true
+        },
+
+        "0x00de": {
+            "name": "Mutant 1/M/W",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 180,
+            "no_deathmatch": true
+        },
+
+        "0x00df": {
+            "name": "Mutant 1/M/S",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 270,
+            "no_deathmatch": true
+        },
+
+        "0x00ea": {
+            "name": "Mutant 3/S/E",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00eb": {
+            "name": "Mutant 3/S/N",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00ec": {
+            "name": "Mutant 3/S/W",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00ed": {
+            "name": "Mutant 3/S/S",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00ee": {
+            "name": "Mutant 3/M/E",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 0,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00ef": {
+            "name": "Mutant 3/M/N",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 90,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00f0": {
+            "name": "Mutant 3/M/W",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 180,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00f1": {
+            "name": "Mutant 3/M/S",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 270,
+            "easy": false,
+            "no_deathmatch": true
+        },
+
+        "0x00fc": {
+            "name": "Mutant 4/S/E",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00fd": {
+            "name": "Mutant 4/S/N",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00fe": {
+            "name": "Mutant 4/S/W",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x00ff": {
+            "name": "Mutant 4/S/S",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x0100": {
+            "name": "Mutant 4/M/E",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 0,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x0101": {
+            "name": "Mutant 4/M/N",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 90,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x0102": {
+            "name": "Mutant 4/M/W",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 180,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "0x0103": {
+            "name": "Mutant 4/M/S",
+            "type": "thing",
+            "ednum": 20027,
+            "angle": 270,
+            "easy": false,
+            "normal": false,
+            "no_deathmatch": true
+        },
+
+        "142": {
+            "name": "Superclone",
+            "type": "thing",
+            "ednum": 20115,
+            "no_deathmatch": true
+        },
+		
+		"0x00e1": {
+            "name": "Spectre",
+            "type": "thing",
+            "ednum": 20119,
+            "no_deathmatch": true
+        },
+		
+		"0x00e0": {
+            "name": "Grim Reaper",
+            "type": "thing",
+            "ednum": 20120,
+            "no_deathmatch": true
+        },
+		
+		"143": {
+            "name": "Hyoto",
+            "type": "thing",
+            "ednum": 20116,
+            "no_deathmatch": true
+        }
+    },
+
+    "areas": {
+        "66": {
+            "name": "Rock LoHiNS/HiLoEW",
+            "floor": "RROCK19",
+            "ceiling": "F_SKY1",
+            "brightness": 128
+        },
+
+        "67": {
+            "name": "Rock HiLoNS/LoHiEW",
+            "floor": "RROCK19",
+            "ceiling": "F_SKY1",
+            "brightness": 128
+        },
+
+        "68": {
+            "name": "Shrubbery 1",
+            "floor": "RROCK19",
+            "ceiling": "F_SKY1",
+            "brightness": 128
+        },
+
+        "69": {
+            "name": "Danger (mines NS)",
+            "floor": "RROCK19",
+            "ceiling": "F_SKY1",
+            "brightness": 128
+        },
+
+        "70": {
+            "name": "Shrubbery 2",
+            "floor": "RROCK19",
+            "ceiling": "F_SKY1",
+            "brightness": 128
+        },
+		
+		"89": {
+            "name": "Castle Ramparts",
+            "ceiling": "F_SKY1",
+			"brightness": 128
+        },
+
+        "106": {
+            "name": "Floor(deaf guard)",
+            "type": "ambush"
+        },
+
+        "107": {
+            "name": "Elevator to secret floor",
+            "type": "secret_exit",
+            "floor": "FSRES2",
+            "ceiling": "FSRES29",
+            "brightness": 128
+        },
+
+        "0x012a": {
+            "name": "Green Slime",
+            "type": "slime5"
+        }
+    }
+}
