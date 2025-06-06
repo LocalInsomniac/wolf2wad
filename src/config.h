@@ -124,6 +124,10 @@ struct ObjectInfo {
 
 enum AreaTypes {
     AREA_NORMAL,
+    AREA_SLIME5,
+    AREA_SLIME10,
+    AREA_SLIME20,
+    AREA_TELEPORT,
     AREA_AMBUSH,
     AREA_SECRET_EXIT,
 };
@@ -135,6 +139,7 @@ struct AreaInfo {
 
     char flats[2][LUMP_NAME_MAX];
     uint8_t brightness;
+    uint16_t tag;
 };
 
 void config_init(const char*);

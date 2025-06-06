@@ -410,6 +410,7 @@ void parse_areas(struct AreaInfo** areas, size_t* num_areas, yyjson_val* value) 
             area->flats[FLAT_CEILING], LUMP_NAME_MAX, yyjson_obj_get(val, "ceiling"), config.flats[FLAT_CEILING]
         );
         parse_uint8(&area->brightness, yyjson_obj_get(val, "brightness"), config.brightness);
+        parse_uint16(&area->tag, yyjson_obj_get(val, "tag"), 0);
 
         /*printf(
             "parse_areas: Area %d is \"%s\" (type: %u, flat: %s/%s, light: %u)\n", area->id, area->name, area->type,
@@ -427,7 +428,15 @@ void parse_area_type(enum AreaTypes* ptr, yyjson_val* value) {
     }
 
     const char* type = yyjson_get_str(value);
-    if (strcmp(type, "ambush") == 0)
+    if (strcmp(type, "slime5") == 0) {
+        *ptr = AREA_SLIME5;
+    } else if (strcmp(type, "slime10") == 0)
+        *ptr = AREA_SLIME10;
+    else if (strcmp(type, "slime20") == 0)
+        *ptr = AREA_SLIME20;
+    else if (strcmp(type, "teleport") == 0)
+        *ptr = AREA_TELEPORT;
+    else if (strcmp(type, "ambush") == 0)
         *ptr = AREA_AMBUSH;
     else if (strcmp(type, "secret_exit") == 0)
         *ptr = AREA_SECRET_EXIT;

@@ -259,49 +259,81 @@ void map_to_wad(const char* output_name) {
                 cell->secret =
                     wolfmap.planes[PLANE_OBJECTS] != NULL && oid_is_pushwall(wolfmap.planes[PLANE_OBJECTS][pos]);
 
-                uint16_t sector_id;
+                uint16_t sector_id, sector_special = ST_NORMAL;
                 if (cell->door != NULL || cell->secret) {
+                    sector_special = cell->secret ? ST_SECRET : ST_NORMAL;
                     sector_id = doommap.last_asector--;
                 } else if (cell->wall != NULL) {
                     sector_id = cell->wall->type == WALL_MIDTEX ? id : NO_SECTOR;
-                } else if (cell->area != NULL && cell->area->type == AREA_AMBUSH) {
-                    struct LineCell* neighbor;
-                    if ((y > 0 && (neighbor = &doommap.linemap[(y - 1) * wolfmap.width + x])->wall == NULL &&
-                         neighbor->door == NULL) ||
-                        (x > 0 && (neighbor = &doommap.linemap[y * wolfmap.width + (x - 1)])->wall == NULL &&
-                         neighbor->door == NULL)) {
-                        sector_id = cell->tile = neighbor->tile;
-                        cell->area = neighbor->area;
-                    } else if ((y < (wolfmap.height - 1) &&
-                                get_wall_info(id = (wolfmap.planes[PLANE_WALLS][(y + 1) * wolfmap.width + x])) ==
-                                    NULL &&
-                                get_door_info(id) == NULL && !aid_is_ambush(id)) ||
-                               (x < (wolfmap.width - 1) &&
-                                get_wall_info(id = (wolfmap.planes[PLANE_WALLS][y * wolfmap.width + (x + 1)])) ==
-                                    NULL &&
-                                get_door_info(id) == NULL && !aid_is_ambush(id))) {
-                        sector_id = cell->tile = id;
-                        cell->area = get_area_info(id);
-                    } else {
-                        sector_id = doommap.last_asector--;
+                } else if (cell->area != NULL) {
+                    switch (cell->area->type) {
+                        default:
+                            sector_id = id;
+                            break;
+
+                        case AREA_SLIME5: {
+                            sector_special = ST_SLIME5;
+                            sector_id = id;
+                            break;
+                        }
+
+                        case AREA_SLIME10: {
+                            sector_special = ST_SLIME10;
+                            sector_id = id;
+                            break;
+                        }
+
+                        case AREA_SLIME20: {
+                            sector_special = ST_SLIME20;
+                            sector_id = id;
+                            break;
+                        }
+
+                        case AREA_AMBUSH: {
+                            struct LineCell* neighbor;
+                            if ((y > 0 && (neighbor = &doommap.linemap[(y - 1) * wolfmap.width + x])->wall == NULL &&
+                                 neighbor->door == NULL) ||
+                                (x > 0 && (neighbor = &doommap.linemap[y * wolfmap.width + (x - 1)])->wall == NULL &&
+                                 neighbor->door == NULL)) {
+                                sector_id = cell->tile = neighbor->tile;
+                                cell->area = neighbor->area;
+                            } else if ((y < (wolfmap.height - 1) &&
+                                        get_wall_info(
+                                            id = (wolfmap.planes[PLANE_WALLS][(y + 1) * wolfmap.width + x])
+                                        ) == NULL &&
+                                        get_door_info(id) == NULL && !aid_is_ambush(id)) ||
+                                       (x < (wolfmap.width - 1) &&
+                                        get_wall_info(
+                                            id = (wolfmap.planes[PLANE_WALLS][y * wolfmap.width + (x + 1)])
+                                        ) == NULL &&
+                                        get_door_info(id) == NULL && !aid_is_ambush(id))) {
+                                sector_id = cell->tile = id;
+                                cell->area = get_area_info(id);
+                            } else {
+                                sector_id = doommap.last_asector--;
+                            }
+
+                            break;
+                        }
                     }
                 } else {
                     sector_id = id;
                 }
 
-                cell->sector = sector_id == NO_SECTOR
-                                   ? NO_SECTOR
-                                   : add_custom_sector(
-                                         sector_id, 0, (cell->door == NULL && !cell->secret) ? 64 : 0,
-                                         cell->door == NULL ? (cell->area == NULL ? get_config()->flats[FLAT_FLOOR]
-                                                                                  : cell->area->flats[FLAT_FLOOR])
-                                                            : cell->door->flats[FLAT_FLOOR],
-                                         cell->door == NULL ? (cell->area == NULL ? get_config()->flats[FLAT_CEILING]
-                                                                                  : cell->area->flats[FLAT_CEILING])
-                                                            : cell->door->flats[FLAT_CEILING],
-                                         cell->area == NULL ? get_config()->brightness : cell->area->brightness,
-                                         cell->secret ? ST_SECRET : ST_NORMAL, cell->door != NULL ? cell->door->tag : 0
-                                     );
+                cell->sector =
+                    sector_id == NO_SECTOR
+                        ? NO_SECTOR
+                        : add_custom_sector(
+                              sector_id, 0, (cell->door == NULL && !cell->secret) ? 64 : 0,
+                              cell->door == NULL ? (cell->area == NULL ? get_config()->flats[FLAT_FLOOR]
+                                                                       : cell->area->flats[FLAT_FLOOR])
+                                                 : cell->door->flats[FLAT_FLOOR],
+                              cell->door == NULL ? (cell->area == NULL ? get_config()->flats[FLAT_CEILING]
+                                                                       : cell->area->flats[FLAT_CEILING])
+                                                 : cell->door->flats[FLAT_CEILING],
+                              cell->area == NULL ? get_config()->brightness : cell->area->brightness, sector_special,
+                              cell->door != NULL ? cell->door->tag : (cell->area != NULL ? cell->area->tag : 0)
+                          );
             }
         }
 
@@ -512,7 +544,9 @@ void map_to_wad(const char* output_name) {
                             add_vertex((x + 1) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 0) * -64), "-", "-",
                             "-", "-", "-", "-",
                             (x + 1) >= wolfmap.width ? NO_SECTOR : doommap.linemap[y * wolfmap.width + (x + 1)].sector,
-                            cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                            cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND,
+                            (cell->area != NULL && cell->area->type == AREA_TELEPORT) ? LT_TELEPORT : LT_NORMAL,
+                            (cell->area != NULL && cell->area->type == AREA_TELEPORT) ? cell->area->tag : 0, 0, 0
                         );
                     }
                 }
@@ -530,7 +564,9 @@ void map_to_wad(const char* output_name) {
                             add_vertex((x + 1) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 0) * -64), "-", "-",
                             "-", "-", "-", "-",
                             (y - 1) < 0 ? NO_SECTOR : doommap.linemap[(y - 1) * wolfmap.width + x].sector, cell->sector,
-                            LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                            LF_TWO_SIDED | LF_BLOCK_SOUND,
+                            (cell->area != NULL && cell->area->type == AREA_TELEPORT) ? LT_TELEPORT : LT_NORMAL,
+                            (cell->area != NULL && cell->area->type == AREA_TELEPORT) ? cell->area->tag : 0, 0, 0
                         );
                     }
                 }
@@ -548,7 +584,9 @@ void map_to_wad(const char* output_name) {
                             add_vertex((x + 0) * 64, (y + 0) * -64), add_vertex((x + 0) * 64, (y + 1) * -64), "-", "-",
                             "-", "-", "-", "-",
                             (x - 1) < 0 ? NO_SECTOR : doommap.linemap[y * wolfmap.width + (x - 1)].sector, cell->sector,
-                            LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                            LF_TWO_SIDED | LF_BLOCK_SOUND,
+                            (cell->area != NULL && cell->area->type == AREA_TELEPORT) ? LT_TELEPORT : LT_NORMAL,
+                            (cell->area != NULL && cell->area->type == AREA_TELEPORT) ? cell->area->tag : 0, 0, 0
                         );
                     }
                 }
@@ -566,7 +604,9 @@ void map_to_wad(const char* output_name) {
                             add_vertex((x + 0) * 64, (y + 1) * -64), add_vertex((x + 1) * 64, (y + 1) * -64), "-", "-",
                             "-", "-", "-", "-",
                             (y + 1) >= wolfmap.height ? NO_SECTOR : doommap.linemap[(y + 1) * wolfmap.width + x].sector,
-                            cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND, 0, 0, 0, 0
+                            cell->sector, LF_TWO_SIDED | LF_BLOCK_SOUND,
+                            (cell->area != NULL && cell->area->type == AREA_TELEPORT) ? LT_TELEPORT : LT_NORMAL,
+                            (cell->area != NULL && cell->area->type == AREA_TELEPORT) ? cell->area->tag : 0, 0, 0
                         );
                     }
                 }

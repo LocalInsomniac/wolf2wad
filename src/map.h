@@ -37,6 +37,9 @@
 #define LF_BLOCK_SOUND 0x0040
 
 #define ST_NORMAL 0
+#define ST_SLIME5 7
+#define ST_SLIME10 5
+#define ST_SLIME20 16
 #define ST_SECRET 9
 
 #define LT_NORMAL 0
@@ -52,6 +55,7 @@
 #define LT_DOOR_YELLOW_SKULL 14727
 #define LT_DOOR_BLUE_SKULL 14663
 #define LT_SWITCH 103
+#define LT_TELEPORT 97
 #define LT_SECRET 118
 #define LT_EXIT 11
 #define LT_SECRET_EXIT 51
