@@ -2461,7 +2461,77 @@
             "type": "thing",
             "ednum": 20116,
             "no_deathmatch": true
-        }
+        },
+		
+		"125": {
+            "name": "Grau Adler",
+            "type": "thing",
+            "ednum": 20117,
+            "no_deathmatch": true
+        },
+		
+		"161": {
+            "name": "Baron von Schmitt",
+            "type": "thing",
+            "ednum": 20118,
+            "no_deathmatch": true
+        },
+		
+		"107": {
+            "name": "Hitler",
+            "type": "thing",
+            "ednum": 20125,
+            "no_deathmatch": true
+        },
+		
+		"0x0106": {
+			"name": "Angel Ghost",
+            "type": "thing",
+            "ednum": 20126,
+            "no_deathmatch": true
+		},
+		
+		"0x0108": {
+			"name": "Ghost 01",
+            "type": "thing",
+            "ednum": 20127,
+            "no_deathmatch": true
+		},
+		
+		"0x0109": {
+			"name": "Ghost 02",
+            "type": "thing",
+            "ednum": 20128,
+            "no_deathmatch": true
+		},
+		
+		"0x010A": {
+			"name": "Ghost 03",
+            "type": "thing",
+            "ednum": 20129,
+            "no_deathmatch": true
+		},
+		
+		"0x010B": {
+			"name": "Ghost 04",
+            "type": "thing",
+            "ednum": 20130,
+            "no_deathmatch": true
+		},
+		
+		"0x010C": {
+			"name": "Ghost 05",
+            "type": "thing",
+            "ednum": 20131,
+            "no_deathmatch": true
+		},
+		
+		"0x010D": {
+			"name": "Ghost 06",
+            "type": "thing",
+            "ednum": 20132,
+            "no_deathmatch": true
+		}
     },
 
     "areas": {
